@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +11,7 @@
   <link rel="stylesheet" href="./pages/index.css">
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body class="page">
   <header class="header">
     <img class="header__logo" src="./images/header-logo.svg" alt="лготип сайта Mesto">
@@ -20,7 +22,7 @@
       <div class="profile__info-block">
         <h1 class="profile__info-title">Кот Кокос</h1>
         <button class="profile__info-edit-button "></button>
-        <p  class="profile__info-subtitle">Любитель цветов</p>
+        <p class="profile__info-subtitle">Любитель цветов</p>
       </div>
       <button class="profile__add-button"></button>
     </section>
@@ -72,5 +74,17 @@
   <footer class="footer">
     <p class="footer__author-text">&copy; 2023 Mesto, Roman</p>
   </footer>
+  <div class="popup popup_opened">
+    <div class="popup__container">
+      <button class="popup__button-close"></button>
+      <form class="popup__form" action="">
+        <h2 class="popup__form-title">Редактировать профиль</h2>
+        <input class="popup__form-input" type="text" value="Кот Кокос">
+        <input class="popup__form-input" type="text" value="Любитель цветов">
+        <button class="popup__form-button-save">Сохранить</button>
+      </form>
+    </div>
+  </div>
 </body>
+
 </html>
