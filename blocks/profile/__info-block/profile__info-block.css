@@ -1,0 +1,19 @@
+.profile__info-block {
+  margin: auto auto auto 0;
+  max-width: 336px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 18px;
+}
+
+@media screen and (max-width: 725px) {
+  .profile__info-block {
+    margin: 22.25px auto 36px auto;
+    gap: 10px 14px;
+    justify-content: center;
+    align-items: center;
+    width: 282px;
+  }
+}

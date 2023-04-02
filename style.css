@@ -17,7 +17,7 @@
 
 /*header */
 
-.header {
+/* .header {
   margin: 45px auto 0 auto;
   height: 74px;
   width: calc(100% - 400px);
@@ -61,11 +61,11 @@
 .header__logo:hover {
   transition: 3s;
   opacity: 0;
-}
+} */
 
 /*header */
 /* Добавить еще более плавный перелом на 425px */
-.profile {
+/* .profile {
   margin: 40px auto 51px auto;
   width: calc(100% - 400px);
   display: flex;
@@ -213,11 +213,11 @@
   opacity: .6;
   transition: 1s;
   cursor: pointer;
-}
+} */
 
 /* elements */
 
-.elements {
+/* .elements {
   margin: 0 auto 0 auto;
   width: calc(100% - 200px);
   display: grid;
@@ -242,9 +242,9 @@
   .elements {
     width: 100%;
   }
-}
+} */
 
-.element {
+/* .element {
   margin: 0;
   width: 282px;
   height: 361px;
@@ -298,13 +298,13 @@
 
 .element__like-button_activ {
   background-image: url(./images/element__like-button_activ.svg);
-}
+} */
 
 
 
 
 
-.footer {
+/* .footer {
   margin: 67px auto 60px auto;
   width: calc(100% - 400px);
 }
@@ -342,14 +342,14 @@
     font-size: 14px;
     line-height: 17px;
   }
-}
+} */
 
 
 
 
 
 /* popup */
-
+/*
 .popup {
   background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
@@ -366,9 +366,9 @@
 
 .popup_opened {
   visibility: hidden;
-}
+} */
 
-.popup__container {
+/* .popup__container {
   width: 430px;
   height: 330px;
   border-radius: 10px;
@@ -438,7 +438,7 @@
 
 
 
-.popup__form-input {
+/* .popup__form-input {
   font-family: inherit;
   display: block;
   border: none;
@@ -451,9 +451,9 @@
   color: #000000;
   margin-bottom: 30px;
   padding-bottom: 13px;
-}
+} */
 
-
+/* 
 .popup__form-input {
   font-family: inherit;
   display: block;
@@ -504,7 +504,7 @@
   transition: 1s;
   cursor: pointer;
 }
-
+ */ */
 
 
 
