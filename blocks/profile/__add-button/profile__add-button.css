@@ -5,11 +5,11 @@
   background-position: center;
   background-repeat: no-repeat;
   background-color: transparent;
-  outline: 2px solid #FFFFFF;
+  border: 2px solid #FFFFFF;
   border-radius: 2px;
 }
 
-@media screen and (max-width: 725px) {
+@media screen and (max-width: 670px) {
   .profile__add-button {
     background-image: url(../../../images/profile-add-img-button-mini.svg);
     width: 282px;
