@@ -9,8 +9,9 @@
   line-height: 22px;
   text-align: center;
   color: #FFFFFF;
-  background-color: #000000;
+  background-color: rgba(0, 0, 0, 1);
   border-radius: 2px;
+  border: none;
 }
 
 @media screen and (max-width: 525px) {

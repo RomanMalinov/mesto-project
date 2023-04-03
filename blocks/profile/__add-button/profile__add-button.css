@@ -4,8 +4,9 @@
   background-image: url(../../../images/profile-add-img-button.svg);
   background-position: center;
   background-repeat: no-repeat;
-  background-color: #000000;
+  background-color: transparent;
   outline: 2px solid #FFFFFF;
+  border-radius: 2px;
 }
 
 @media screen and (max-width: 725px) {

@@ -5,8 +5,8 @@
   background-image: url(../../../images/profile-edit-img-button.svg);
   background-position: center;
   background-repeat: no-repeat;
-  background-color: #000000;
-  outline: 1px solid #FFFFFF;
+  background-color: transparent;
+  border: 1px solid #FFFFFF;
 }
 
 

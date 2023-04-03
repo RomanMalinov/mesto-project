@@ -13,7 +13,6 @@
     margin: 22.25px auto 36px auto;
     gap: 10px 14px;
     justify-content: center;
-    align-items: center;
-    width: 282px;
+    max-width: 282px;
   }
 }
