@@ -9,6 +9,8 @@
   <meta name="author" content="Roman">
   <title>Mesto</title>
   <link rel="stylesheet" href="./pages/index.css">
+  <link rel="stylesheet" href="./style.css">
+  <script src="./pages/script.js" defer></script>
 </head>
 
 <body class="page">
@@ -32,6 +34,7 @@
           <h2 class="element__img-caption">Ландыши</h2>
           <button class="element__like-button" type="button"></button>
         </div>
+        <button class="element__delete-button"></button>
       </article>
       <article class="element">
         <img class="element__img" src="./images/element__img-cat-3.jpg" alt="фотография кота с цветами">
@@ -39,6 +42,7 @@
           <h2 class="element__img-caption">Полевые цветы</h2>
           <button class="element__like-button" type="button"></button>
         </div>
+        <button class="element__delete-button"></button>
       </article>
       <article class="element">
         <img class="element__img" src="./images/element__img-cat-4.jpg" alt="фотография кота с цветами">
@@ -46,6 +50,7 @@
           <h2 class="element__img-caption">Розы</h2>
           <button class="element__like-button" type="button"></button>
         </div>
+        <button class="element__delete-button"></button>
       </article>
       <article class="element">
         <img class="element__img" src="./images/element__img-cat-5.jpg" alt="фотография кота с цветами">
@@ -53,6 +58,7 @@
           <h2 class="element__img-caption">Пионы</h2>
           <button class="element__like-button" type="button"></button>
         </div>
+        <button class="element__delete-button"></button>
       </article>
       <article class="element">
         <img class="element__img" src="./images/element__img-cat-6.jpg" alt="фотография кота с цветами">
@@ -60,6 +66,7 @@
           <h2 class="element__img-caption">Ромашки</h2>
           <button class="element__like-button" type="button"></button>
         </div>
+        <button class="element__delete-button"></button>
       </article>
       <article class="element">
         <img class="element__img" src="./images/element__img-cat-8.jpg" alt="фотография кота с цветами">
@@ -67,23 +74,48 @@
           <h2 class="element__img-caption">Незабудки</h2>
           <button class="element__like-button" type="button"></button>
         </div>
+        <button class="element__delete-button"></button>
       </article>
     </section>
   </main>
   <footer class="footer">
     <p class="footer__author-text">&copy; 2023 Mesto, Roman</p>
   </footer>
-  <div class="popup">
+  <!-- profile modal window -->
+  <div class="popup popup_type_profile">
     <div class="popup__container">
       <button class="popup__button-close" type="button"></button>
-      <form class="popup__form" name="popup-container-profile">
-        <h2 class="popup__form-title">Редактировать профиль</h2>
-        <input class="popup__form-input" type="text" value="Кот Кокос" name="form-profile-name">
-        <input class="popup__form-input" type="text" value="Любитель цветов" name="form-profile-description">
-        <button class="popup__form-button-save" type="submit">Сохранить</button>
+      <form class="popup__form" name="popup-new-cards">
+        <h2 class="popup__form-title">Новое место</h2>
+        <input class="popup__form-input" type="text" value="Название" name="form-new-cards-name">
+        <input class="popup__form-input" type="text" value="Ссылка на картинку" name="form-new-cards-link">
+        <button class="popup__form-button-save" type="submit">Создать</button>
       </form>
     </div>
   </div>
 </body>
-
+<!-- new cards modal window -->
+<div class="popup popup_type_add_new-cards">
+  <div class="popup__container">
+    <button class="popup__button-close" type="button"></button>
+    <form class="popup__form" name="popup-new-cards">
+      <h2 class="popup__form-title popup__form-title-color">Новое  место</h2>
+      <input class="popup__form-input" type="text" value="Название" name="form-new-cards-name">
+      <input class="popup__form-input" type="text" value="Ссылка на картинку" name="form-new-cards-link">
+      <button class="popup__form-button-save" type="submit">Создать</button>
+    </form>
+  </div>
+</div>
+</body>
+<!--  big cardmodal window -->
+<div class="popup popup_type_open-card border">
+  <div class="popup__container-open-card border">
+    <button class="popup__button-close border " type="button"></button>
+    <figure>
+      <img class="border" src="" alt="">
+      <figcaption class="border">Название</figcaption>
+    </figure>
+  </div>
+</div>
+</body>
 </html>
