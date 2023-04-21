@@ -28,7 +28,7 @@
       <button class="profile__add-button" type="button"></button>
     </section>
     <section class="elements">
-      <article class="element">
+      <!-- <article class="element">
         <img class="element__img " src="./images/element__img-cat-7.jpg" alt="фотография кота с цветами">
         <div class="element__img-block">
           <h2 class="element__img-caption">Ландыши</h2>
@@ -75,7 +75,7 @@
           <button class="element__like-button" type="button"></button>
         </div>
         <button class="element__delete-button"></button>
-      </article>
+      </article> -->
     </section>
   </main>
   <footer class="footer">
@@ -84,11 +84,11 @@
   <!-- profile modal window -->
   <div class="popup popup_type_profile">
     <div class="popup__container">
-      <button class="popup__button-close" type="button"></button>
-      <form class="popup__form" name="popup-new-cards">
-        <h2 class="popup__form-title">Новое место</h2>
-        <input class="popup__form-input" type="text" value="Название" name="form-new-cards-name">
-        <input class="popup__form-input" type="text" value="Ссылка на картинку" name="form-new-cards-link">
+      <button class="popup__button-close popup__button-close-popup-profile" type="button"></button>
+      <form class="popup__form popup__form-type-profile" name="popup-new-cards">
+        <h2 class="popup__form-title">Редактировать профиль</h2>
+        <input class="popup__form-input popup__form-input-name" type="text" value="Кот Кокос" name="form-new-cards-name">
+        <input class="popup__form-input popup__form-input-job" type="text" value="Любитель цветов" name="form-new-cards-link">
         <button class="popup__form-button-save" type="submit">Создать</button>
       </form>
     </div>
@@ -97,8 +97,8 @@
 <!-- new cards modal window -->
 <div class="popup popup_type_add_new-cards">
   <div class="popup__container">
-    <button class="popup__button-close" type="button"></button>
-    <form class="popup__form" name="popup-new-cards">
+    <button class="popup__button-close popup__button-close-add_new-cards" type="button"></button>
+    <form class="popup__form popup__form_type_add_new-cards" name="popup-new-cards">
       <h2 class="popup__form-title popup__form-title-color">Новое  место</h2>
       <input class="popup__form-input" type="text" value="Название" name="form-new-cards-name">
       <input class="popup__form-input" type="text" value="Ссылка на картинку" name="form-new-cards-link">
@@ -116,6 +116,18 @@
       <figcaption class="border">Название</figcaption>
     </figure>
   </div>
+  <!-- template -->
+<template class="template">
+  <article class="element">
+    <img class="element__img" src="./images/element__img-cat-8.jpg" alt="фотография кота с цветами">
+    <div class="element__img-block">
+      <h2 class="element__img-caption">Незабудки</h2>
+      <button class="element__like-button" type="button"></button>
+    </div>
+    <button class="element__delete-button"></button>
+  </article>
+</template>
+
 </div>
 </body>
 </html>
