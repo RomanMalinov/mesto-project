@@ -58,13 +58,14 @@ function addCard(item) {
     targetItem.remove();
   }
   // слушатель функция открытия модального окна по клику на картинку элемента
-  const img = newItem.querySelector('.element__img')
-  img.addEventListener('click', imageClickHandler)
   // функция открытия модального окна по клику на картинку элемента
+  const img = newItem.querySelector('.element__img')
   function imageClickHandler() {
     popupCardsImage.src = item.link;
     popupCardsText.textContent = item.name;
-  };
+  }
+
+  img.addEventListener('click', imageClickHandler)
   return newItem;
 }
 renderCards(addCard);
