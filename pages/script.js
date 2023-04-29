@@ -14,6 +14,8 @@ const popupCardsText = popupCards.querySelector('.popup__container-text');
 const closeButtons = document.querySelectorAll('.popup__close');
 // Редактирование имени и информации о себе
 const formPopupProfile = document.forms['profile-form'];
+const nameInput = document.querySelector('.profile__info-title');
+const jobInput = document.querySelector('.profile__info-subtitle');
 // Находим поля формы в DOM
 const popupProfileNameInput = document.querySelector('.popup__form-input-name');
 const popupProfilejobInput = document.querySelector('.popup__form-input-job');
@@ -66,8 +68,8 @@ function addCard(item) {
 
   // Лайк карточки
   const likeButtonEl = newItem.querySelector('.element__like-button');
-  likeButtonEl.addEventListener('click', likeCard);
-  function likeCard(evt) {
+  likeButtonEl.addEventListener('click', toggleCard);
+  function toggleCard(evt) {
     evt.target.classList.toggle('element__like-button_activ');
   };
 
@@ -81,13 +83,13 @@ function addCard(item) {
   }
   // слушатель функция открытия модального окна по клику на картинку элемента
   // функция открытия модального окна по клику на картинку элемента
-  function imageClickHandler() {
+  function handleClickImage() {
     popupCardsImage.src = item.link;
     popupCardsText.textContent = item.name;
-    popupCardsImage.alt = item.name;
+    popupCardsImage.alt = item.name
     openPopup(popupCards);
   }
-  imageEl.addEventListener('click', imageClickHandler)
+  imageEl.addEventListener('click', handleClickImage)
   return newItem;
 }
 renderCards(addCard);
@@ -101,8 +103,6 @@ function closePopup(popup) {
 function openPopup(popup) {
   popup.classList.add('popup_opened');
 }
-
-console.log(closeButtons);
 closeButtons.forEach((button) => {
   // находим 1 раз ближайший к крестику попап
   const popup = button.closest('.popup');
@@ -117,11 +117,8 @@ profileAddCardsButton.addEventListener('click', () => openPopup(popupAddNewCards
 // Обработчик «отправки» формы
 function handleProfileFormSubmit(evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-  const nameInputForm = document.querySelector('.profile__info-title');
-  const jobInputForm = document.querySelector('.profile__info-subtitle');
-  nameInputForm.textContent = popupProfileNameInput.value;
-  jobInputForm.textContent = popupProfilejobInput.value;
-  evt.target.reset();
+  nameInput.textContent = popupProfileNameInput.value;
+  jobInput.textContent = popupProfilejobInput.value;
   closePopup(popupProfile)
 }
 formPopupProfile.addEventListener('submit', handleProfileFormSubmit);
