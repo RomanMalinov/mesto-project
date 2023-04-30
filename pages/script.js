@@ -68,8 +68,8 @@ function addCard(item) {
 
   // Лайк карточки
   const likeButtonEl = newItem.querySelector('.element__like-button');
-  likeButtonEl.addEventListener('click', toggleCard);
-  function toggleCard(evt) {
+  likeButtonEl.addEventListener('click', toggleLikeCard);
+  function toggleLikeCard(evt) {
     evt.target.classList.toggle('element__like-button_activ');
   };
 
@@ -111,7 +111,11 @@ closeButtons.forEach((button) => {
 });
 
 //Функции открытия модальных окон
-profileInfoEditButton.addEventListener('click', () => openPopup(popupProfile));
+profileInfoEditButton.addEventListener('click', () => {
+  popupProfileNameInput.value = nameInput.textContent;
+  popupProfilejobInput.value = jobInput.textContent
+  openPopup(popupProfile)
+});
 profileAddCardsButton.addEventListener('click', () => openPopup(popupAddNewCards));
 
 // Обработчик «отправки» формы
