@@ -57,6 +57,7 @@ function renderCards(addCard) {
   const newCards = initialCards.map(addCard);
   listContainerEl.append(...newCards)
 }
+renderCards(addCard);
 
 function addCard(item) {
   const newItem = temlateEl.content.cloneNode(true);
@@ -92,7 +93,7 @@ function addCard(item) {
   imageEl.addEventListener('click', handleClickImage)
   return newItem;
 }
-renderCards(addCard);
+
 
 // функции открытия и закрытия модальных окон
 // функции закрытия
