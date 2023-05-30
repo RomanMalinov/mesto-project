@@ -37,3 +37,7 @@
 @import url(../blocks/popup/__container-zoom-card/popup__container-zoom-card.css);
 @import url(../blocks/popup/__container-img/popup__container-img.css);
 @import url(../blocks/popup/__container-text/popup__container-text.css);
+@import url(../blocks/popup/__form-input/_type_error/form__input_type_error.css);
+@import url(../blocks/popup/__form-input/_type_error/form__input-error_active.css);
+@import url(../blocks/popup/__form-button-save/_inactive/button_inactive.css);
+
