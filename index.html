@@ -86,10 +86,23 @@
       <button class="popup__button-close popup__close" type="button"></button>
       <form class="popup__form" name="profile-form" novalidate>
         <h2 class="popup__form-title">Редактировать профиль</h2>
-        <input class="popup__form-input popup__form-input-name"  id="name-input" type="text"required minlength="2" maxlength="40" placeholder="Имя" name="form-new-cards-name" >
-        <span class="form__input-error" id="name-input-error"></span>
-        <input class="popup__form-input popup__form-input-job" id="job-input" type="text" required minlength="2" maxlength="200" placeholder="Род деятельности" name="form-new-cards-link" >
-        <span class="form__input-error" id="job-input-error"></span>
+        <input class="popup__form-input popup__form-input-name"
+        id="name-input"
+        type="text" required minlength="2"
+        maxlength="40"
+        placeholder="Имя"
+        name="form-new-cards-name"
+        pattern="^[a-zA-Z]+$"
+        data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы">
+        <span class="form__input-error name-input-error"></span>
+        <input class="popup__form-input popup__form-input-job"
+        id="job-input"
+        type="text"
+        required minlength="2"
+        maxlength="200"
+        placeholder="Род деятельности"
+        name="form-new-cards-link">
+        <span class="form__input-error job-input-error"></span>
         <button class="popup__form-button-save " type="submit">Сохранить</button>
       </form>
     </div>
@@ -100,11 +113,24 @@
     <button class="popup__button-close popup__close" type="button"></button>
     <form class="popup__form popup__form_type_new-card" name="card-form" novalidate>
       <h2 class="popup__form-title">Новое  место</h2>
-      <input class="popup__form-input popup__form-input-img-name" id="img-name-input" required minlength="2" maxlength="30" type="text" placeholder="Название" name="form-new-cards-name">
-      <span class="form__input-error" id="img-name-input-error"></span>
-      <input class="popup__form-input popup__form-input-link" id="link-input" required type="url" placeholder="Ссылка на картинку" name="form-new-cards-link">
-      <span class="form__input-error"  id="link-input-error"></span>
-      <button class="popup__form-button-save" type="submit" >Создать</button>
+      <input
+      class="popup__form-input popup__form-input-img-name"
+      id="img-name-input"
+      required minlength="2"
+      maxlength="30"
+      type="text"
+      placeholder="Название"
+      name="form-new-cards-name"
+      pattern="^[a-zA-Z]+$"
+      data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы">
+      <span class="form__input-error img-name-input-error"></span>
+      <input class="popup__form-input popup__form-input-link"
+      id="link-input"
+      required type="url"
+      placeholder="Ссылка на картинку"
+      name="form-new-cards-link">
+      <span class="form__input-error link-input-error" ></span>
+      <button class="popup__form-button-save button_inactive" type="submit" >Создать</button>
     </form>
   </div>
 </div>
