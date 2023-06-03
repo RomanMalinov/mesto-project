@@ -9,7 +9,6 @@
   <meta name="author" content="Roman">
   <title>Mesto</title>
   <link rel="stylesheet" href="./pages/index.css">
-  <script src="./pages/script.js" defer></script>
 </head>
 
 <body class="page">
@@ -92,7 +91,7 @@
         maxlength="40"
         placeholder="Имя"
         name="form-new-cards-name"
-        pattern="^[a-zA-Z]+$"
+        pattern="[A-Za-zА-пр-ё -]+"
         data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы">
         <span class="form__input-error name-input-error"></span>
         <input class="popup__form-input popup__form-input-job"
@@ -121,7 +120,7 @@
       type="text"
       placeholder="Название"
       name="form-new-cards-name"
-      pattern="^[a-zA-Z]+$"
+      pattern="[A-Za-zА-пр-ё -]+"
       data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы">
       <span class="form__input-error img-name-input-error"></span>
       <input class="popup__form-input popup__form-input-link"
@@ -153,5 +152,6 @@
     <button class="element__delete-button"></button>
   </article>
 </template>
+<script type="module" src="./components/index.js"></script>
 </body>
 </html>
