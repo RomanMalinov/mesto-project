@@ -1,8 +1,26 @@
-import { listContainerEl, temlateEl, popupProfile, popupAddNewCards, profileInfoEditButton, profileAddCardsButton, popupCards,
+import './pages/index.css';
+import {
+  listContainerEl, temlateEl, popupProfile, popupAddNewCards, profileInfoEditButton, profileAddCardsButton, popupCards,
   popupCardsImage, popupCardsText, popups, closeButtons, formPopupProfile, nameInput, jobInput, popupProfileNameInput,
-   popupProfilejobInput, formPopupNewCards, popupNewCardsNameInput, popupNewCardsLinkInput } from './utils.js'
+  popupProfilejobInput, formPopupNewCards, popupNewCardsNameInput, popupNewCardsLinkInput
+} from './components/utils.js'
 
-import { initialCards } from './card.js';
+
+const catOne = new URL('./images/element__img-cat-7.jpg', import.meta.url);
+const catTwo = new URL('./images/element__img-cat-3.jpg', import.meta.url);
+const catThree = new URL('./images/element__img-cat-8.jpg', import.meta.url);
+const catFour = new URL('./images/element__img-cat-4.jpg', import.meta.url);
+const catFive = new URL('./images/element__img-cat-5.jpg', import.meta.url);
+const catSix = new URL('./images/element__img-cat-6.jpg', import.meta.url);
+
+const initialCards = [
+  { name: 'Ландыши', link: catOne },
+  { name: 'Полевые цветы', link: catTwo },
+  { name: 'Незабудки', link: catThree },
+  { name: 'Розы', link: catFour },
+  { name: 'Пионы', link: catFive },
+  { name: 'Ромашки', link: catSix }
+];
 
 function renderCards(addCard) {
   const newCards = initialCards.map(addCard);
@@ -43,16 +61,16 @@ function addCard(item) {
   return newItem;
 }
 
-import { closePopup, openPopup } from './modal.js';
+import { closePopup, openPopup } from './components/modal.js';
 
- closeButtons.forEach((button) => {
-   // находим 1 раз ближайший к крестику попап
-   const popup = button.closest('.popup');
-   // устанавливаем обработчик закрытия на крестик
-   button.addEventListener('click', () => closePopup(popup));
- });
+closeButtons.forEach((button) => {
+  // находим 1 раз ближайший к крестику попап
+  const popup = button.closest('.popup');
+  // устанавливаем обработчик закрытия на крестик
+  button.addEventListener('click', () => closePopup(popup));
+});
 
-//3. Функции закрытия модальных окон кликом на оверлей и нажатием на Esc
+// //3. Функции закрытия модальных окон кликом на оверлей и нажатием на Esc
 popups.forEach((button) => {
   const popup = button.closest('.popup');
   button.addEventListener('click', (evt) => {
@@ -96,7 +114,7 @@ function handleFormAddNewCard(evt) {
 }
 formPopupNewCards.addEventListener('submit', handleFormAddNewCard);
 
-import  { hasInvalidInput, toggleButtonState, showInputError, hideInputError, checkInputValidity, setEventListeners } from './validate.js';
+import { hasInvalidInput, toggleButtonState, showInputError, hideInputError, checkInputValidity, setEventListeners } from './components/validate.js';
 
 const enableValidation = ({ formSelector, inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass
 }) => {

@@ -8,16 +8,16 @@
   <meta name="keywords" content="HTML5, CSS">
   <meta name="author" content="Roman">
   <title>Mesto</title>
-  <link rel="stylesheet" href="./pages/index.css">
+  <!-- <link rel="stylesheet" href="./pages/index.css"> -->
 </head>
 
 <body class="page">
   <header class="header">
-    <img class="header__logo" src="./images/header-logo.svg" alt="лготип сайта Mesto">
+    <img class="header__logo" src="<%=require('./images/header-logo.svg')%>" alt="логотип сайта Mesto">
   </header>
   <main class="content">
     <section class="profile">
-      <img class="profile__image" src="./images/cat-profile-img.jpg" alt="фотография Кота">
+      <img class="profile__image" src="<%=require('./images/cat-profile-img.jpg')%>" alt="фотография Кота">
       <div class="profile__info-block">
         <h1 class="profile__info-title">Кот Кокос</h1>
         <button class="profile__info-edit-button" type="button"></button>
@@ -152,6 +152,6 @@
     <button class="element__delete-button"></button>
   </article>
 </template>
-<script type="module" src="./components/index.js"></script>
+<script type="module" src="/src/index.js"></script>
 </body>
 </html>
