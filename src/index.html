@@ -8,7 +8,9 @@
   <meta name="keywords" content="HTML5, CSS">
   <meta name="author" content="Roman">
   <title>Mesto</title>
-  <!-- <link rel="stylesheet" href="./pages/index.css"> -->
+  <link rel="shortcut icon" href="#" />
+  <!-- <link rel="stylesheet" href="./pages/index.css">
+<script defer type="module" src="/src/index.js"></script> -->
 </head>
 
 <body class="page">
@@ -26,54 +28,6 @@
       <button class="profile__add-button" type="button"></button>
     </section>
     <section class="elements">
-      <!-- <article class="element">
-        <img class="element__img " src="./images/element__img-cat-7.jpg" alt="фотография кота с цветами">
-        <div class="element__img-block">
-          <h2 class="element__img-caption">Ландыши</h2>
-          <button class="element__like-button" type="button"></button>
-        </div>
-        <button class="element__delete-button"></button>
-      </article>
-      <article class="element">
-        <img class="element__img" src="./images/element__img-cat-3.jpg" alt="фотография кота с цветами">
-        <div class="element__img-block">
-          <h2 class="element__img-caption">Полевые цветы</h2>
-          <button class="element__like-button" type="button"></button>
-        </div>
-        <button class="element__delete-button"></button>
-      </article>
-      <article class="element">
-        <img class="element__img" src="./images/element__img-cat-4.jpg" alt="фотография кота с цветами">
-        <div class="element__img-block">
-          <h2 class="element__img-caption">Розы</h2>
-          <button class="element__like-button" type="button"></button>
-        </div>
-        <button class="element__delete-button"></button>
-      </article>
-      <article class="element">
-        <img class="element__img" src="./images/element__img-cat-5.jpg" alt="фотография кота с цветами">
-        <div class="element__img-block">
-          <h2 class="element__img-caption">Пионы</h2>
-          <button class="element__like-button" type="button"></button>
-        </div>
-        <button class="element__delete-button"></button>
-      </article>
-      <article class="element">
-        <img class="element__img" src="./images/element__img-cat-6.jpg" alt="фотография кота с цветами">
-        <div class="element__img-block">
-          <h2 class="element__img-caption">Ромашки</h2>
-          <button class="element__like-button" type="button"></button>
-        </div>
-        <button class="element__delete-button"></button>
-      </article>
-      <article class="element">
-        <img class="element__img" src="./images/element__img-cat-8.jpg" alt="фотография кота с цветами">
-        <div class="element__img-block">
-          <h2 class="element__img-caption">Незабудки</h2>
-          <button class="element__like-button" type="button"></button>
-        </div>
-        <button class="element__delete-button"></button>
-      </article> -->
     </section>
   </main>
   <footer class="footer">
@@ -85,73 +39,54 @@
       <button class="popup__button-close popup__close" type="button"></button>
       <form class="popup__form" name="profile-form" novalidate>
         <h2 class="popup__form-title">Редактировать профиль</h2>
-        <input class="popup__form-input popup__form-input-name"
-        id="name-input"
-        type="text" required minlength="2"
-        maxlength="40"
-        placeholder="Имя"
-        name="form-new-cards-name"
-        pattern="[A-Za-zА-пр-ё -]+"
-        data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы">
+        <input class="popup__form-input popup__form-input-name" id="name-input" type="text" required minlength="2"
+          maxlength="40" placeholder="Имя" name="form-new-cards-name" pattern="[A-Za-zА-пр-ё -]+"
+          data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы">
         <span class="form__input-error name-input-error"></span>
-        <input class="popup__form-input popup__form-input-job"
-        id="job-input"
-        type="text"
-        required minlength="2"
-        maxlength="200"
-        placeholder="Род деятельности"
-        name="form-new-cards-link">
+        <input class="popup__form-input popup__form-input-job" id="job-input" type="text" required minlength="2"
+          maxlength="200" placeholder="Род деятельности" name="form-new-cards-link">
         <span class="form__input-error job-input-error"></span>
         <button class="popup__form-button-save " type="submit">Сохранить</button>
       </form>
     </div>
   </div>
-<!-- new card modal window -->
-<div class="popup popup_type_add_new-cards">
-  <div class="popup__container">
-    <button class="popup__button-close popup__close" type="button"></button>
-    <form class="popup__form popup__form_type_new-card" name="card-form" novalidate>
-      <h2 class="popup__form-title">Новое  место</h2>
-      <input
-      class="popup__form-input popup__form-input-img-name"
-      id="img-name-input"
-      required minlength="2"
-      maxlength="30"
-      type="text"
-      placeholder="Название"
-      name="form-new-cards-name"
-      pattern="[A-Za-zА-пр-ё -]+"
-      data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы">
-      <span class="form__input-error img-name-input-error"></span>
-      <input class="popup__form-input popup__form-input-link"
-      id="link-input"
-      required type="url"
-      placeholder="Ссылка на картинку"
-      name="form-new-cards-link">
-      <span class="form__input-error link-input-error" ></span>
-      <button class="popup__form-button-save button_inactive" type="submit" >Создать</button>
-    </form>
-  </div>
-</div>
-<!-- zoom cardModal window -->
-<div class="popup popup_type_zoom-card">
-  <div class="popup__container-zoom-card">
-    <button class="popup__button-close popup__close" type="button"></button>
-      <img class="popup__container-img" src="./images/element__img-cat-8.jpg" alt="увеличенное фото">
-      <p class="popup__container-text">Название</p>
-  </div>
-</div>
-  <!-- template -->
-<template class="template">
-  <article class="element">
-    <img class="element__img" src="./images/element__img-cat-8.jpg" alt="фотография кота с цветами">
-    <div class="element__img-block">
-      <h2 class="element__img-caption">Незабудки</h2>
-      <button class="element__like-button" type="button"></button>
+  <!-- new card modal window -->
+  <div class="popup popup_type_add_new-cards">
+    <div class="popup__container">
+      <button class="popup__button-close popup__close" type="button"></button>
+      <form class="popup__form popup__form_type_new-card" name="card-form" novalidate>
+        <h2 class="popup__form-title">Новое место</h2>
+        <input class="popup__form-input popup__form-input-img-name" id="img-name-input" required minlength="2"
+          maxlength="30" type="text" placeholder="Название" name="form-new-cards-name" pattern="[A-Za-zА-пр-ё -]+"
+          data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы">
+        <span class="form__input-error img-name-input-error"></span>
+        <input class="popup__form-input popup__form-input-link" id="link-input" required type="url"
+          placeholder="Ссылка на картинку" name="form-new-cards-link">
+        <span class="form__input-error link-input-error"></span>
+        <button class="popup__form-button-save button_inactive" disabled type="submit">Создать</button>
+      </form>
     </div>
-    <button class="element__delete-button"></button>
-  </article>
-</template>
-<script type="module" src="/src/index.js"></script>
+  </div>
+  <!-- zoom cardModal window -->
+  <div class="popup popup_type_zoom-card">
+    <div class="popup__container-zoom-card">
+      <button class="popup__button-close popup__close" type="button"></button>
+      <img class="popup__container-img" src="" alt="">
+      <p class="popup__container-text">Название</p>
+    </div>
+  </div>
+  <!-- template -->
+  <template class="template">
+    <article class="element">
+      <img class="element__img" src="" alt="">
+      <div class="element__img-block">
+        <h2 class="element__img-caption">Незабудки</h2>
+        <button class="element__like-button" type="button"></button>
+      </div>
+      <button class="element__delete-button"></button>
+    </article>
+  </template>
+
 </body>
+
 </html>

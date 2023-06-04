@@ -1,5 +1,5 @@
 export { listContainerEl, temlateEl, popupProfile, popupAddNewCards, profileInfoEditButton, profileAddCardsButton, popupCards,
-  popupCardsImage, popupCardsText, popups, closeButtons, formPopupProfile, nameInput, jobInput, popupProfileNameInput,
+  popupCardsImage, popupCardsText, popups, formPopupProfile, nameInput, jobInput, popupProfileNameInput,
    popupProfilejobInput, formPopupNewCards, popupNewCardsNameInput, popupNewCardsLinkInput };
 
 // Переменные
@@ -16,7 +16,6 @@ const popupCardsImage = popupCards.querySelector('.popup__container-img');
 const popupCardsText = popupCards.querySelector('.popup__container-text');
 // Все кнопки закрытия модальных окон
 const popups = document.querySelectorAll('.popup');
-const closeButtons = document.querySelectorAll('.popup__close');
 // Редактирование имени и информации о себе
 const formPopupProfile = document.forms['profile-form'];
 const nameInput = document.querySelector('.profile__info-title');

@@ -1,26 +1,12 @@
 import './pages/index.css';
 import {
   listContainerEl, temlateEl, popupProfile, popupAddNewCards, profileInfoEditButton, profileAddCardsButton, popupCards,
-  popupCardsImage, popupCardsText, popups, closeButtons, formPopupProfile, nameInput, jobInput, popupProfileNameInput,
+  popupCardsImage, popupCardsText, popups, formPopupProfile, nameInput, jobInput, popupProfileNameInput,
   popupProfilejobInput, formPopupNewCards, popupNewCardsNameInput, popupNewCardsLinkInput
-} from './components/utils.js'
-
-
-const catOne = new URL('./images/element__img-cat-7.jpg', import.meta.url);
-const catTwo = new URL('./images/element__img-cat-3.jpg', import.meta.url);
-const catThree = new URL('./images/element__img-cat-8.jpg', import.meta.url);
-const catFour = new URL('./images/element__img-cat-4.jpg', import.meta.url);
-const catFive = new URL('./images/element__img-cat-5.jpg', import.meta.url);
-const catSix = new URL('./images/element__img-cat-6.jpg', import.meta.url);
-
-const initialCards = [
-  { name: 'Ландыши', link: catOne },
-  { name: 'Полевые цветы', link: catTwo },
-  { name: 'Незабудки', link: catThree },
-  { name: 'Розы', link: catFour },
-  { name: 'Пионы', link: catFive },
-  { name: 'Ромашки', link: catSix }
-];
+} from './components/constants.js'
+import { closePopup, openPopup } from './components/modal.js';
+import { initialCards, catOne, catTwo, catThree, catFour, catFive, catSix } from './components/card.js';
+import { hasInvalidInput, toggleButtonState, showInputError, hideInputError, checkInputValidity, setEventListeners, enableValidation } from './components/validate.js';
 
 function renderCards(addCard) {
   const newCards = initialCards.map(addCard);
@@ -61,29 +47,24 @@ function addCard(item) {
   return newItem;
 }
 
-import { closePopup, openPopup } from './components/modal.js';
-
-closeButtons.forEach((button) => {
-  // находим 1 раз ближайший к крестику попап
-  const popup = button.closest('.popup');
-  // устанавливаем обработчик закрытия на крестик
-  button.addEventListener('click', () => closePopup(popup));
-});
-
-// //3. Функции закрытия модальных окон кликом на оверлей и нажатием на Esc
-popups.forEach((button) => {
-  const popup = button.closest('.popup');
-  button.addEventListener('click', (evt) => {
-    if (evt.target.classList.contains('popup')) {
-      closePopup(popup)
-    }
+popups.forEach((popup) => {
+  popup.addEventListener('mousedown', (evt) => {
+      if (evt.target.classList.contains('popup_opened')) {
+          closePopup(popup)
+      }
+      if (evt.target.classList.contains('popup__close')) {
+        closePopup(popup)
+      }
   })
-  document.addEventListener('keydown', function (evt) {
-    if (evt.key === "Escape") {
-      closePopup(popup);
-    }
-  });
 })
+
+function closeByEscape(evt) {
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened')
+    closePopup(openedPopup);
+  }
+}
+document.addEventListener('keydown', closeByEscape);
 
 //Функции открытия модальных окон
 profileInfoEditButton.addEventListener('click', () => {
@@ -101,7 +82,7 @@ function handleProfileFormSubmit(evt) {
   closePopup(popupProfile);
 }
 formPopupProfile.addEventListener('submit', handleProfileFormSubmit);
-
+const popupFormBattonSave = formPopupNewCards.querySelector('.popup__form-button-save')
 //Функции открытия модальных окон
 function handleFormAddNewCard(evt) {
   evt.preventDefault();
@@ -110,26 +91,17 @@ function handleFormAddNewCard(evt) {
   const newCard = addCard({ name: newName, link: newLink });
   listContainerEl.prepend(newCard)
   evt.target.reset();
+  popupFormBattonSave.setAttribute('disabled', true);
+  popupFormBattonSave.classList.add('button_inactive');
   closePopup(popupAddNewCards);
 }
 formPopupNewCards.addEventListener('submit', handleFormAddNewCard);
-
-import { hasInvalidInput, toggleButtonState, showInputError, hideInputError, checkInputValidity, setEventListeners } from './components/validate.js';
-
-const enableValidation = ({ formSelector, inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass
-}) => {
-  const formElements = document.querySelectorAll(formSelector);
-  const formList = Array.from(formElements);
-  formList.forEach((formElement) => {
-    setEventListeners(formElement, inputSelector, submitButtonSelector, inactiveButtonClass);
-  });
-};
 
 enableValidation({
   formSelector: '.popup__form',
   inputSelector: '.popup__form-input',
   submitButtonSelector: '.popup__form-button-save',
   inactiveButtonClass: 'button_inactive',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
+  inputErrorClass: 'form__input-error',
+  errorClass: 'form__input-error_active'
 });
