@@ -1,6 +1,6 @@
 export { listContainerEl, temlateEl, popupProfile, popupAddNewCards, profileInfoEditButton, profileAddCardsButton, popupCards,
   popupCardsImage, popupCardsText, popups, formPopupProfile, nameInput, jobInput, popupProfileNameInput,
-   popupProfilejobInput, formPopupNewCards, popupNewCardsNameInput, popupNewCardsLinkInput };
+   popupProfilejobInput, formPopupNewCards, popupNewCardsNameInput, popupNewCardsLinkInput, popupFormBattonSave };
 
 // Переменные
 const listContainerEl = document.querySelector('.elements');
@@ -27,3 +27,4 @@ const popupProfilejobInput = document.querySelector('.popup__form-input-job');
 const formPopupNewCards = document.forms['card-form'];
 const popupNewCardsNameInput = document.querySelector('.popup__form-input-img-name');
 const popupNewCardsLinkInput = document.querySelector('.popup__form-input-link')
+const popupFormBattonSave = formPopupNewCards.querySelector('.popup__form-button-save')

@@ -1,33 +1,8 @@
-//  export {initialCards};
-
-// const initialCards = [
-//  {
-//    name: 'Ландыши',
-//    link: './images/element__img-cat-7.jpg',
-//  },
-//  {
-//    name: 'Полевые цветы',
-//    link: './images/element__img-cat-3.jpg',
-//  },
-//  {
-//    name: 'Незабудки',
-//    link: './images/element__img-cat-8.jpg',
-//  },
-//  {
-//    name: 'Розы',
-//    link: './images/element__img-cat-4.jpg',
-//  },
-//  {
-//    name: 'Пионы',
-//    link: './images/element__img-cat-5.jpg',
-//  },
-//  {
-//    name: 'Ромашки',
-//    link: './images/element__img-cat-6.jpg',
-//  }
-// ]
-
-
+import {
+  listContainerEl, temlateEl, popupAddNewCards, popupCards, popupCardsImage, popupCardsText,
+  formPopupNewCards, popupNewCardsNameInput, popupNewCardsLinkInput, popupFormBattonSave
+} from './constants.js'
+import { closePopup, openPopup } from './modal.js';
 const catOne = new URL('../images/element__img-cat-7.jpg', import.meta.url);
 const catTwo = new URL('../images/element__img-cat-3.jpg', import.meta.url);
 const catThree = new URL('../images/element__img-cat-1.jpg', import.meta.url);
@@ -43,5 +18,55 @@ const initialCards = [
   { name: 'Пионы', link: catFive },
   { name: 'Ромашки', link: catSix }
 ];
+//функция рендеринга карточек
+function renderCards(addCard) {
+  const newCards = initialCards.map(addCard);
+  listContainerEl.append(...newCards)
+}
+renderCards(addCard);
 
-export { initialCards, catOne, catTwo, catThree, catFour, catFive, catSix  };
+function addCard(item) {
+  const newItem = temlateEl.content.cloneNode(true);
+  const captionEl = newItem.querySelector('.element__img-caption');
+  const imageEl = newItem.querySelector('.element__img');
+  captionEl.textContent = item.name;
+  imageEl.src = item.link;
+  imageEl.alt = item.name;
+  // Лайк карточки
+  const likeButtonEl = newItem.querySelector('.element__like-button');
+  likeButtonEl.addEventListener('click', toggleLikeCard);
+  function toggleLikeCard(evt) {
+    evt.target.classList.toggle('element__like-button_activ');
+  };
+  // Удаление карточки
+  const deleteButtonEl = newItem.querySelector('.element__delete-button');
+  deleteButtonEl.addEventListener('click', deleteCard);
+  function deleteCard(evt) {
+    const targetEl = evt.target;
+    const targetItem = targetEl.closest('.element');
+    targetItem.remove();
+  }
+  // слушатель функция открытия модального окна по клику на картинку элемента
+  // функция открытия модального окна по клику на картинку элемента
+  function handleClickImage() {
+    popupCardsImage.src = item.link;
+    popupCardsText.textContent = item.name;
+    popupCardsImage.alt = item.name
+    openPopup(popupCards);
+  }
+  imageEl.addEventListener('click', handleClickImage)
+  return newItem;
+}
+//функция добавление новой карточки через заполнение формы
+function handleFormAddNewCard(evt) {
+  evt.preventDefault();
+  const newName = popupNewCardsNameInput.value;
+  const newLink = popupNewCardsLinkInput.value;
+  const newCard = addCard({ name: newName, link: newLink });
+  listContainerEl.prepend(newCard)
+  evt.target.reset();
+  popupFormBattonSave.setAttribute('disabled', true);
+  popupFormBattonSave.classList.add('button_inactive');
+  closePopup(popupAddNewCards);
+}
+formPopupNewCards.addEventListener('submit', handleFormAddNewCard);
