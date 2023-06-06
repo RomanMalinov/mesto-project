@@ -3,6 +3,8 @@ import {
   formPopupNewCards, popupNewCardsNameInput, popupNewCardsLinkInput, popupFormBattonSave
 } from './constants.js'
 import { closePopup, openPopup } from './modal.js';
+export { handleFormAddNewCard };
+
 const catOne = new URL('../images/element__img-cat-7.jpg', import.meta.url);
 const catTwo = new URL('../images/element__img-cat-3.jpg', import.meta.url);
 const catThree = new URL('../images/element__img-cat-1.jpg', import.meta.url);
@@ -69,4 +71,4 @@ function handleFormAddNewCard(evt) {
   popupFormBattonSave.classList.add('button_inactive');
   closePopup(popupAddNewCards);
 }
-formPopupNewCards.addEventListener('submit', handleFormAddNewCard);
+

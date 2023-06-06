@@ -1,8 +1,8 @@
-export { closePopup, openPopup };
+export { closePopup, openPopup, handleProfileFormSubmit };
 import {
-  popupProfile, popupAddNewCards, profileInfoEditButton, profileAddCardsButton,
-  popups, formPopupProfile, nameInput, jobInput, popupProfileNameInput, popupProfilejobInput
-} from './constants.js';
+popupProfile, popupAddNewCards, profileInfoEditButton, profileAddCardsButton,
+popups, formPopupProfile, nameInput, jobInput, popupProfileNameInput, popupProfilejobInput
+ } from './constants.js';
 
 popups.forEach((popup) => {
   popup.addEventListener('mousedown', (evt) => {
@@ -42,11 +42,11 @@ function handleProfileFormSubmit(evt) {
   jobInput.textContent = popupProfilejobInput.value;
   closePopup(popupProfile);
 }
-formPopupProfile.addEventListener('submit', handleProfileFormSubmit);
+
 
 profileInfoEditButton.addEventListener('click', () => {
   popupProfileNameInput.value = nameInput.textContent;
   popupProfilejobInput.value = jobInput.textContent
   openPopup(popupProfile)
 });
-profileAddCardsButton.addEventListener('click', () => openPopup(popupAddNewCards));
+

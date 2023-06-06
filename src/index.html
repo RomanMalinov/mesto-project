@@ -40,7 +40,7 @@
       <form class="popup__form" name="profile-form" novalidate>
         <h2 class="popup__form-title">Редактировать профиль</h2>
         <input class="popup__form-input popup__form-input-name" id="name-input" type="text" required minlength="2"
-          maxlength="40" placeholder="Имя" name="form-new-cards-name" pattern="[A-Za-zА-пр-ё -]+"
+          maxlength="40" placeholder="Имя" name="form-new-cards-name" pattern="[A-Za-zА-пр-ё \-]+$"
           data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы">
         <span class="form__input-error name-input-error"></span>
         <input class="popup__form-input popup__form-input-job" id="job-input" type="text" required minlength="2"
@@ -57,7 +57,7 @@
       <form class="popup__form popup__form_type_new-card" name="card-form" novalidate>
         <h2 class="popup__form-title">Новое место</h2>
         <input class="popup__form-input popup__form-input-img-name" id="img-name-input" required minlength="2"
-          maxlength="30" type="text" placeholder="Название" name="form-new-cards-name" pattern="[A-Za-zА-пр-ё -]+"
+          maxlength="30" type="text" placeholder="Название" name="form-new-cards-name" pattern="[A-Za-zА-пр-ё \-]+$"
           data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы">
         <span class="form__input-error img-name-input-error"></span>
         <input class="popup__form-input popup__form-input-link" id="link-input" required type="url"

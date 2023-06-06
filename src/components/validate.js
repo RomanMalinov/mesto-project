@@ -1,4 +1,4 @@
-export { hasInvalidInput, toggleButtonState, showInputError, hideInputError, checkInputValidity, setEventListeners, enableValidation };
+export { enableValidation };
 
 //Кнопки
 function hasInvalidInput(inputList) {
