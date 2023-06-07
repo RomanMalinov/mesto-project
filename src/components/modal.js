@@ -4,16 +4,6 @@ popupProfile, popupAddNewCards, profileInfoEditButton, profileAddCardsButton,
 popups, formPopupProfile, nameInput, jobInput, popupProfileNameInput, popupProfilejobInput
  } from './constants.js';
 
-popups.forEach((popup) => {
-  popup.addEventListener('mousedown', (evt) => {
-    if (evt.target.classList.contains('popup_opened')) {
-      closePopup(popup)
-    }
-    if (evt.target.classList.contains('popup__close')) {
-      closePopup(popup)
-    }
-  })
-})
 
 // функции открытия и закрытия модальных окон
 // функции закрытия
@@ -44,9 +34,5 @@ function handleProfileFormSubmit(evt) {
 }
 
 
-profileInfoEditButton.addEventListener('click', () => {
-  popupProfileNameInput.value = nameInput.textContent;
-  popupProfilejobInput.value = jobInput.textContent
-  openPopup(popupProfile)
-});
+
 

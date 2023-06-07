@@ -24,6 +24,12 @@ profileAddCardsButton.addEventListener('click', () => openPopup(popupAddNewCards
 
 formPopupProfile.addEventListener('submit', handleProfileFormSubmit);
 
+profileInfoEditButton.addEventListener('click', () => {
+  popupProfileNameInput.value = nameInput.textContent;
+  popupProfilejobInput.value = jobInput.textContent
+  openPopup(popupProfile)
+});
+
 enableValidation({
   formSelector: '.popup__form',
   inputSelector: '.popup__form-input',
