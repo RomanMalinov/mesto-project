@@ -1,0 +1,26 @@
+.profile__avatar-update-button {
+
+  background-image: url("../../../images/profile__avatar-update-button.svg");
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  position: absolute;
+  opacity: 0;
+  border: 0;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: .8s ease-in;
+
+}
+
+@media screen and (max-width: 670px) {
+  .profile__avatar-update-button{
+    margin-bottom: 169px;
+  }
+}
+
+.profile__avatar-update-button:hover {
+  opacity: .8;
+  background-color: #000;
+  cursor: pointer;
+}
