@@ -1,11 +1,11 @@
 console.log('test')
-export { onResponse, getAllTasks, addTask, additTasks, deleteTask, likesCards, getAllInfo, getUserInfo }
-// Набор функция для использования API
+export { getAllCards,  getUserInfo, editProfile, addNewCard, deleteCard, likesCards, deleteLikesCards, editAvatar }
+
 // Объект конфигурации
 const config = {
   baseUrl: 'https://nomoreparties.co/v1/plus-cohort-25',
   headers: {
-    'Content-Type': 'application/json',
+    'content-type': 'application/json',
     authorization: '4795c652-4f69-4cb4-b309-abc01e676f2c',
   }
 }
@@ -14,8 +14,10 @@ function onResponse(res) {
   return res.ok ? res.json() : res.json().then((data) => Promise.reject(data))
 }
 
+//_____________________________________________________________________
+
 //загрузка карточек с сервера
-function getAllTasks(body) {
+function getAllCards() {
   return fetch(`${config.baseUrl}/cards`, {
     method: 'GET',
     headers: config.headers
@@ -32,63 +34,59 @@ function getUserInfo() {
     .then(onResponse)
 }
 
-function getAllInfo() {
-  return Promise.all([getAllTasks(), getUserInfo()])
+//редактирование профиля пользователя
+function editProfile(data) {
+  return fetch(`${config.baseUrl}/users/me`, {
+    method: 'PATCH',
+    headers: config.headers,
+    body: JSON.stringify(data)
+  })
+    .then(onResponse)
 }
 
-//добавление карточки
-function addTask(body) {
+//получение новой карточки
+function addNewCard(data) {
   return fetch(`${config.baseUrl}/cards`, {
     method: 'POST',
     headers: config.headers,
-    body: JSON.stringify(body)
+    body: JSON.stringify(data)
   })
     .then(onResponse)
 }
 
 //удаление карточки
-function deleteTask(_id) {
-  return fetch(`${config.baseUrl}/cards/${_id}`, {
+function deleteCard(cardId) {
+  return fetch(`${config.baseUrl}/cards/${cardId}`, {
     method: 'DELETE',
     headers: config.headers
   })
     .then(onResponse)
 }
 
-//редактирование профиля пользователя
-//постановка и снятие лайка
-//обновление аватара пользователя
-
-// ЗАпрос к серверу
-//предоставление информации о пользователе
-
-
-
-function additTasks(body, _id) {
-  return fetch(`${config.baseUrl}/users/me`, {
-    method: 'PATCH',
-    headers: config.headers,
-    body: JSON.stringify(body)
-  })
-    .then(onResponse)
-}
-
-
-
-function likesCards(_id) {
-  return fetch(`${config.baseUrl}/cards/likes/${_id}`, {
+//постановка лайка
+function likesCards(cardId) {
+  return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
     method: 'PUT',
     headers: config.headers
   })
     .then(onResponse)
 }
 
-
-function deleteLikesCards(_id) {
-  return fetch(`${config.baseUrl}/cards/likes/${_id}`, {
+//снятие лайка
+function deleteLikesCards(cardId) {
+  return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
     method: 'DELETE',
-    headers: config.headers
+    headers: config.headers,
   })
     .then(onResponse)
 }
 
+//обновление аватара пользователя
+function editAvatar(data) {
+  return fetch(`${config.baseUrl}/users/me/avatar`, {
+    method: 'PATCH',
+    headers: config.headers,
+    body: JSON.stringify(data)
+  })
+    .then(onResponse)
+}

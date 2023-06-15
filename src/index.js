@@ -1,14 +1,25 @@
-
 import './pages/index.css';
-import './components/api.js'
 import {
-  listContainerEl, popupProfile, popupAddNewCards, profileInfoEditButton, profileAddCardsButton, popups, formPopupProfile, nameInput,
-  jobInput, popupProfileNameInput, popupProfilejobInput, formPopupNewCards, popupNewCardsNameInput, popupNewCardsLinkInput, popupFormBattonSave
+  listContainerEl, temlateEl, popupProfile, popupAddNewCards, profileInfoEditButton, profileAddCardsButton, popupCards,
+  popupCardsImage, popupCardsText, popups, formPopupProfile, nameInput, jobInput, popupProfileNameInput,
+   popupProfilejobInput, formPopupNewCards, popupNewCardsNameInput, popupNewCardsLinkInput, popupFormBattonSave
 } from './components/constants.js'
-import { handleFormAddNewCard} from './components/card.js';
+import { handleFormAddNewCard, addCard } from './components/card.js';
 import { hasInvalidInput, toggleButtonState, showInputError, hideInputError, checkInputValidity, setEventListeners, enableValidation } from './components/validate.js';
 import { closePopup, handleProfileFormSubmit, openPopup } from './components/modal.js'
-import  {onResponse, getAllTasks, addTask, additTasks, deleteTask} from './components/api.js'
+import { getAllCards,  getUserInfo, editProfile, addNewCard, deleteCard, likesCards, deleteLikesCards, editAvatar } from './components/api.js'
+
+
+// Запрос информации
+Promise.all([getUserInfo(), getAllCards()])
+  .then(([user, initialCards]) => {
+    nameInput.textContent = user.name;
+    jobInput.textContent = user.about;
+    // profileAvatar.src = user.avatar;
+  const newCards = initialCards.map(addCard);
+   listContainerEl.append(...newCards)
+  })
+
 popups.forEach((popup) => {
   popup.addEventListener('mousedown', (evt) => {
     if (evt.target.classList.contains('popup_opened')) {

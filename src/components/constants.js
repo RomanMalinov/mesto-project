@@ -26,5 +26,5 @@ const popupProfilejobInput = document.querySelector('.popup__form-input-job');
 //Форма добавления карточки
 const formPopupNewCards = document.forms['card-form'];
 const popupNewCardsNameInput = document.querySelector('.popup__form-input-img-name');
-const popupNewCardsLinkInput = document.querySelector('.popup__form-input-link')
-const popupFormBattonSave = formPopupNewCards.querySelector('.popup__form-button-save')
+const popupNewCardsLinkInput = document.querySelector('.popup__form-input-link');
+const popupFormBattonSave = formPopupNewCards.querySelector('.popup__form-button-save');
