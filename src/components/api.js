@@ -1,5 +1,5 @@
 console.log('test')
-export { getAllCards,  getUserInfo, editProfile, addNewCard, deleteCard, likesCards, deleteLikesCards, editAvatar }
+export { getAllCards,  getUserInfo, editProfile, addNewCard, deleteCard, likesCards, deleteLikesCards, changeAvatarImg }
 
 // Объект конфигурации
 const config = {
@@ -15,6 +15,7 @@ function onResponse(res) {
 }
 
 //_____________________________________________________________________
+
 
 //загрузка карточек с сервера
 function getAllCards() {
@@ -35,21 +36,21 @@ function getUserInfo() {
 }
 
 //редактирование профиля пользователя
-function editProfile(data) {
+function editProfile(dataProfile) {
   return fetch(`${config.baseUrl}/users/me`, {
     method: 'PATCH',
     headers: config.headers,
-    body: JSON.stringify(data)
+    body: JSON.stringify(dataProfile)
   })
     .then(onResponse)
 }
 
 //получение новой карточки
-function addNewCard(data) {
+function addNewCard(dataCard) {
   return fetch(`${config.baseUrl}/cards`, {
     method: 'POST',
     headers: config.headers,
-    body: JSON.stringify(data)
+    body: JSON.stringify(dataCard)
   })
     .then(onResponse)
 }
@@ -82,11 +83,14 @@ function deleteLikesCards(cardId) {
 }
 
 //обновление аватара пользователя
-function editAvatar(data) {
+function changeAvatarImg(avatarData) {
   return fetch(`${config.baseUrl}/users/me/avatar`, {
     method: 'PATCH',
     headers: config.headers,
-    body: JSON.stringify(data)
+    body: JSON.stringify(avatarData)
   })
     .then(onResponse)
 }
+
+
+

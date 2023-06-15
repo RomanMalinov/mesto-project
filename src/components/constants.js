@@ -1,6 +1,7 @@
 export { listContainerEl, temlateEl, popupProfile, popupAddNewCards, profileInfoEditButton, profileAddCardsButton, popupCards,
   popupCardsImage, popupCardsText, popups, formPopupProfile, nameInput, jobInput, popupProfileNameInput,
-   popupProfilejobInput, formPopupNewCards, popupNewCardsNameInput, popupNewCardsLinkInput, popupFormBattonSave };
+   popupProfilejobInput, formPopupNewCards, popupNewCardsNameInput, popupNewCardsLinkInput, popupFormBattonSave,
+   formPopupAvatar, popupAvatarLinkInput, profileAddAvatarButton, popupAvatar, popupImgAvatar };
 
 // Переменные
 const listContainerEl = document.querySelector('.elements');
@@ -10,6 +11,9 @@ const popupProfile = document.querySelector('.popup_type_profile');
 const popupAddNewCards = document.querySelector('.popup_type_add_new-cards');
 const profileInfoEditButton = document.querySelector('.profile__info-edit-button');
 const profileAddCardsButton = document.querySelector('.profile__add-button');
+const profileAddAvatarButton = document.querySelector('.profile__avatar-update-button');
+const popupAvatar = document.querySelector('.popup_type_add__img-avatar');
+
 // Открытие попапа с картинкой
 const popupCards = document.querySelector('.popup_type_zoom-card');
 const popupCardsImage = popupCards.querySelector('.popup__container-img');
@@ -28,3 +32,9 @@ const formPopupNewCards = document.forms['card-form'];
 const popupNewCardsNameInput = document.querySelector('.popup__form-input-img-name');
 const popupNewCardsLinkInput = document.querySelector('.popup__form-input-link');
 const popupFormBattonSave = formPopupNewCards.querySelector('.popup__form-button-save');
+//aватар
+const formPopupAvatar = document.forms['avatar-form'];
+const popupAvatarLinkInput = document.querySelector('.popup__form-input-link-avatar');
+const popupImgAvatar = document.querySelector('.profile__image');
+
+

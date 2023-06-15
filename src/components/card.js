@@ -1,9 +1,11 @@
 import {
   listContainerEl, temlateEl, popupAddNewCards, popupCards, popupCardsImage, popupCardsText,
-  formPopupNewCards, popupNewCardsNameInput, popupNewCardsLinkInput, popupFormBattonSave
+  formPopupNewCards, popupNewCardsNameInput, popupNewCardsLinkInput, popupFormBattonSave, profileAddAvatarButton
 } from './constants.js'
 import { closePopup, openPopup } from './modal.js';
 export { handleFormAddNewCard, addCard };
+import { getAllCards,  getUserInfo, editProfile, addNewCard, deleteCard, likesCards, deleteLikesCards, editAvatar } from './api.js'
+import { data } from 'jquery';
 
 // массив карточек для предудущей проектной работы
 // const catOne = new URL('../images/element__img-cat-7.jpg', import.meta.url);
@@ -40,7 +42,8 @@ function addCard(item) {
   function toggleLikeCard(evt) {
     evt.target.classList.toggle('element__like-button_activ');
   };
-  // Удаление карточки
+
+
   const deleteButtonEl = newItem.querySelector('.element__delete-button');
   deleteButtonEl.addEventListener('click', deleteCard);
   function deleteCard(evt) {
@@ -48,6 +51,14 @@ function addCard(item) {
     const targetItem = targetEl.closest('.element');
     targetItem.remove();
   }
+  // Удаление карточки
+  // const deleteButtonEl = newItem.querySelector('.element__delete-button');
+  // deleteButtonEl.addEventListener('click', deleteCard);
+  // function deleteCard(evt) {
+  //   const targetEl = evt.target;
+  //   const targetItem = targetEl.closest('.element');
+  //   targetItem.remove();
+  // }
   // слушатель функция открытия модального окна по клику на картинку элемента
   // функция открытия модального окна по клику на картинку элемента
   function handleClickImage() {
@@ -62,12 +73,16 @@ function addCard(item) {
 //функция добавление новой карточки через заполнение формы
 function handleFormAddNewCard(evt) {
   evt.preventDefault();
-  const newName = popupNewCardsNameInput.value;
-  const newLink = popupNewCardsLinkInput.value;
-  const newCard = addCard({ name: newName, link: newLink });
-  listContainerEl.prepend(newCard)
-  evt.target.reset();
-  popupFormBattonSave.setAttribute('disabled', true);
-  popupFormBattonSave.classList.add('button_inactive');
-  closePopup(popupAddNewCards);
+  return addNewCard({ name: popupNewCardsNameInput.value, link: popupNewCardsLinkInput.value })  //?
+    .then(dataCard => {
+      const newName = popupNewCardsNameInput.value;
+      const newLink = popupNewCardsLinkInput.value;
+      const newCard = addCard({ name: newName, link: newLink });
+      listContainerEl.prepend(newCard)
+      evt.target.reset();
+      popupFormBattonSave.setAttribute('disabled', true);
+      popupFormBattonSave.classList.add('button_inactive');
+      closePopup(popupAddNewCards);
+    })
 }
+
