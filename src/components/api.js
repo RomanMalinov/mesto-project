@@ -1,5 +1,5 @@
 console.log('test')
-export { getAllCards,  getUserInfo, editProfile, addNewCard, deleteCard, likesCards, deleteLikesCards, changeAvatarImg }
+export { getAllCards, getUserInfo, editProfile, addNewCard, deleteCardFrom, addLike, removeLike, changeAvatarImg }
 
 // Объект конфигурации
 const config = {
@@ -15,7 +15,6 @@ function onResponse(res) {
 }
 
 //_____________________________________________________________________
-
 
 //загрузка карточек с сервера
 function getAllCards() {
@@ -56,8 +55,8 @@ function addNewCard(dataCard) {
 }
 
 //удаление карточки
-function deleteCard(cardId) {
-  return fetch(`${config.baseUrl}/cards/${cardId}`, {
+function deleteCardFrom(card) {
+  return fetch(`${config.baseUrl}/cards/${card}`, {
     method: 'DELETE',
     headers: config.headers
   })
@@ -65,8 +64,8 @@ function deleteCard(cardId) {
 }
 
 //постановка лайка
-function likesCards(cardId) {
-  return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
+function addLike(dataId) {
+  return fetch(`${config.baseUrl}/cards/likes/${dataId}`, {
     method: 'PUT',
     headers: config.headers
   })
@@ -74,8 +73,8 @@ function likesCards(cardId) {
 }
 
 //снятие лайка
-function deleteLikesCards(cardId) {
-  return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
+function removeLike(dataId) {
+  return fetch(`${config.baseUrl}/cards/likes/${dataId}`, {
     method: 'DELETE',
     headers: config.headers,
   })

@@ -11,14 +11,16 @@ import { getAllCards,  getUserInfo, editProfile, addNewCard, deleteCard, likesCa
 
 
 // ЗАпрос на получение одновременной информации через промис
-Promise.all([getUserInfo(), getAllCards()])
-  .then(([user, initialCards]) => {
-    nameInput.textContent = user.name;
-    jobInput.textContent = user.about;
-    popupImgAvatar.src = user.avatar;
-  const newCards = initialCards.map(addCard);
-   listContainerEl.append(...newCards)
-  })
+// Promise.all([getUserInfo(), getAllCards()])
+//   .then(([user, initialCards]) => {
+//     nameInput.textContent = user.name;
+//     jobInput.textContent = user.about;
+//     popupImgAvatar.src = user.avatar;
+
+
+//     const newCards = initialCards.map(addCard);
+//    listContainerEl.append(...newCards)
+//   })
 
 popups.forEach((popup) => {
   popup.addEventListener('mousedown', (evt) => {
@@ -38,6 +40,7 @@ profileAddCardsButton.addEventListener('click', () => openPopup(popupAddNewCards
 formPopupProfile.addEventListener('submit', handleProfileFormSubmit);
 
 profileInfoEditButton.addEventListener('click', () => {
+
   popupProfileNameInput.value = nameInput.textContent;
   popupProfilejobInput.value = jobInput.textContent
   openPopup(popupProfile)

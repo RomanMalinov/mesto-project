@@ -2,11 +2,11 @@ export { closePopup, openPopup, handleProfileFormSubmit };
 import {
   listContainerEl, temlateEl, popupProfile, popupAddNewCards, profileInfoEditButton, profileAddCardsButton, popupCards,
   popupCardsImage, popupCardsText, popups, formPopupProfile, nameInput, jobInput, popupProfileNameInput,
-   popupProfilejobInput, formPopupNewCards, popupNewCardsNameInput, popupNewCardsLinkInput, popupFormBattonSave,
-   formPopupAvatar, popupAvatarLinkInput, profileAddAvatarButton, popupAvatar, popupImgAvatar
- } from './constants.js';
-
- import { getAllCards,  getUserInfo, editProfile, addNewCard, deleteCard, likesCards, deleteLikesCards, changeAvatarImg } from './api.js'
+  popupProfilejobInput, formPopupNewCards, popupNewCardsNameInput, popupNewCardsLinkInput, popupFormBattonSave,
+  formPopupAvatar, popupAvatarLinkInput, profileAddAvatarButton, popupAvatar, popupImgAvatar, popupFormBattonSaveProfile, popupFormBattonSavenewCards, popupFormBattonSaveAvatar
+} from './constants.js';
+import { setStatusButton } from './utils.js'
+import { getAllCards, getUserInfo, editProfile, addNewCard, deleteCardFrom, addLike, removeLike, changeLikeStatus, changeAvatarImg } from './api.js'
 // функции открытия и закрытия модальных окон
 // функции закрытия
 function closePopup(popup) {
@@ -28,26 +28,39 @@ function closeByEscape(evt) {
   }
 }
 
+
+
 function handleProfileFormSubmit(evt) {
-  evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
- return editProfile({ name: popupProfileNameInput.value, about: popupProfilejobInput.value })
- .then(dataProfile => {
-  nameInput.textContent = popupProfileNameInput.value;
-  jobInput.textContent = popupProfilejobInput.value;
-  closePopup(popupProfile);
- })
-}
-  function handleAvatarFormSubmit (evt) {
-    evt.preventDefault()
-    return changeAvatarImg ({ avatar: popupAvatarLinkInput.value })
-    .then(avatarData => {
-    popupImgAvatar.src = avatarData.avatar;
-   closePopup(popupAvatar);
+  evt.preventDefault();
+  setStatusButton ({ buttonEl: popupFormBattonSaveProfile, text: 'Сохраняем..'})
+  return editProfile({ name: popupProfileNameInput.value, about: popupProfilejobInput.value })
+    .then(dataProfile => {
+      nameInput.textContent = popupProfileNameInput.value;
+      jobInput.textContent = popupProfilejobInput.value;
+      closePopup(popupProfile);
     })
-   }
+    .catch(err => console.log(err))
+    .finally(() => {
+      setStatusButton ({ buttonEl: popupFormBattonSaveProfile, text: 'Сохранить' })
+    })
+}
+function handleAvatarFormSubmit(evt) {
+  evt.preventDefault()
+  setStatusButton ({ buttonEl: popupFormBattonSaveAvatar, text: 'Сохраняем..'})
+  popupFormBattonSave.textContent = 'Сохранение...'
+  return changeAvatarImg({ avatar: popupAvatarLinkInput.value })
+    .then(avatarData => {
+      popupImgAvatar.src = avatarData.avatar;
+      closePopup(popupAvatar);
+    })
+    .catch(err => console.log(err))
+    .finally(() => {
+      setStatusButton ({ buttonEl: popupFormBattonSaveAvatar, text: 'Сохранить'})
+    })
+}
 
 
 profileAddAvatarButton.addEventListener('click', () => openPopup(popupAvatar));
 
- formPopupAvatar.addEventListener('submit', handleAvatarFormSubmit);
+formPopupAvatar.addEventListener('submit', handleAvatarFormSubmit);
 // //

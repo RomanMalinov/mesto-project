@@ -1,7 +1,7 @@
 export { listContainerEl, temlateEl, popupProfile, popupAddNewCards, profileInfoEditButton, profileAddCardsButton, popupCards,
   popupCardsImage, popupCardsText, popups, formPopupProfile, nameInput, jobInput, popupProfileNameInput,
    popupProfilejobInput, formPopupNewCards, popupNewCardsNameInput, popupNewCardsLinkInput, popupFormBattonSave,
-   formPopupAvatar, popupAvatarLinkInput, profileAddAvatarButton, popupAvatar, popupImgAvatar };
+   formPopupAvatar, popupAvatarLinkInput, profileAddAvatarButton, popupAvatar, popupImgAvatar, popupFormBattonSaveProfile, popupFormBattonSavenewCards, popupFormBattonSaveAvatar };
 
 // Переменные
 const listContainerEl = document.querySelector('.elements');
@@ -36,5 +36,9 @@ const popupFormBattonSave = formPopupNewCards.querySelector('.popup__form-button
 const formPopupAvatar = document.forms['avatar-form'];
 const popupAvatarLinkInput = document.querySelector('.popup__form-input-link-avatar');
 const popupImgAvatar = document.querySelector('.profile__image');
+// кнопки сохранении для ux
+const popupFormBattonSaveProfile = document.querySelector('.popup__form-button-save-profile');
+const popupFormBattonSavenewCards = document.querySelector('.popup__form-button-save-new-cards');
+const popupFormBattonSaveAvatar = document.querySelector('.popup__form-button-save-avatar');
 
 
