@@ -32,7 +32,7 @@ function closeByEscape(evt) {
 
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
-  setStatusButton ({ buttonEl: popupFormBattonSaveProfile, text: 'Сохраняем..'})
+  setStatusButton({ buttonEl: popupFormBattonSaveProfile, text: 'Сохраняем..' })
   return editProfile({ name: popupProfileNameInput.value, about: popupProfilejobInput.value })
     .then(dataProfile => {
       nameInput.textContent = popupProfileNameInput.value;
@@ -41,12 +41,12 @@ function handleProfileFormSubmit(evt) {
     })
     .catch(err => console.log(err))
     .finally(() => {
-      setStatusButton ({ buttonEl: popupFormBattonSaveProfile, text: 'Сохранить' })
+      setStatusButton({ buttonEl: popupFormBattonSaveProfile, text: 'Сохранить' })
     })
 }
 function handleAvatarFormSubmit(evt) {
   evt.preventDefault()
-  setStatusButton ({ buttonEl: popupFormBattonSaveAvatar, text: 'Сохраняем..'})
+  setStatusButton({ buttonEl: popupFormBattonSaveAvatar, text: 'Сохраняем..' })
   popupFormBattonSave.textContent = 'Сохранение...'
   return changeAvatarImg({ avatar: popupAvatarLinkInput.value })
     .then(avatarData => {
@@ -55,7 +55,7 @@ function handleAvatarFormSubmit(evt) {
     })
     .catch(err => console.log(err))
     .finally(() => {
-      setStatusButton ({ buttonEl: popupFormBattonSaveAvatar, text: 'Сохранить'})
+      setStatusButton({ buttonEl: popupFormBattonSaveAvatar, text: 'Сохранить' })
     })
 }
 

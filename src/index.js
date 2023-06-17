@@ -2,25 +2,13 @@ import './pages/index.css';
 import {
   listContainerEl, temlateEl, popupProfile, popupAddNewCards, profileInfoEditButton, profileAddCardsButton, popupCards,
   popupCardsImage, popupCardsText, popups, formPopupProfile, nameInput, jobInput, popupProfileNameInput,
-   popupProfilejobInput, formPopupNewCards, popupNewCardsNameInput, popupNewCardsLinkInput, popupFormBattonSave, popupImgAvatar
+  popupProfilejobInput, formPopupNewCards, popupNewCardsNameInput, popupNewCardsLinkInput, popupFormBattonSave, popupImgAvatar
 } from './components/constants.js'
 import { handleFormAddNewCard, addCard } from './components/card.js';
 import { hasInvalidInput, toggleButtonState, showInputError, hideInputError, checkInputValidity, setEventListeners, enableValidation } from './components/validate.js';
 import { closePopup, handleProfileFormSubmit, openPopup } from './components/modal.js'
-import { getAllCards,  getUserInfo, editProfile, addNewCard, deleteCard, likesCards, deleteLikesCards, editAvatar } from './components/api.js'
+import { getAllCards, getUserInfo, editProfile, addNewCard, deleteCard, likesCards, deleteLikesCards, editAvatar } from './components/api.js'
 
-
-// ЗАпрос на получение одновременной информации через промис
-// Promise.all([getUserInfo(), getAllCards()])
-//   .then(([user, initialCards]) => {
-//     nameInput.textContent = user.name;
-//     jobInput.textContent = user.about;
-//     popupImgAvatar.src = user.avatar;
-
-
-//     const newCards = initialCards.map(addCard);
-//    listContainerEl.append(...newCards)
-//   })
 
 popups.forEach((popup) => {
   popup.addEventListener('mousedown', (evt) => {

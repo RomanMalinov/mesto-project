@@ -74,7 +74,7 @@ function addCard(item) {
     }
   }
 
-// лайк карточек
+  // лайк карточек
   const likeCount = newItem.querySelector('.element__like-counter');
   likeCount.textContent = item.likes.length;
   if (item.likes.find((like) => like.id == userId)) {
@@ -110,7 +110,7 @@ function addCard(item) {
 
 //функция добавление новой карточки через заполнение формы
 function handleFormAddNewCard(evt) {
-  setStatusButton ({ buttonEl: popupFormBattonSavenewCards, text: 'Сохраняем..', disabled: true })
+  setStatusButton({ buttonEl: popupFormBattonSavenewCards, text: 'Сохраняем..', disabled: true })
   evt.preventDefault();
   return addNewCard({ name: popupNewCardsNameInput.value, link: popupNewCardsLinkInput.value })  //?
     .then(dataCard => {
@@ -125,7 +125,7 @@ function handleFormAddNewCard(evt) {
     })
     .catch(err => console.log(err))
     .finally(() => {
-      setStatusButton ({ buttonEl: popupFormBattonSavenewCards, text: 'Добавить', disabled: false })
+      setStatusButton({ buttonEl: popupFormBattonSavenewCards, text: 'Добавить', disabled: false })
     })
 }
 
