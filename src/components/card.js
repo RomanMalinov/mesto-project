@@ -46,6 +46,7 @@ Promise.all([getUserInfo(), getAllCards()])
     const newCards = initialCards.map(addCard);
     listContainerEl.append(...newCards)
   })
+  .catch(err => console.log(err))
 
 function addCard(item) {
   console.log(userId)
@@ -114,9 +115,7 @@ function handleFormAddNewCard(evt) {
   evt.preventDefault();
   return addNewCard({ name: popupNewCardsNameInput.value, link: popupNewCardsLinkInput.value })  //?
     .then(dataCard => {
-      const newName = popupNewCardsNameInput.value;
-      const newLink = popupNewCardsLinkInput.value;
-      const newCard = addCard({ name: newName, link: newLink });
+      const newCard = addCard(dataCard);
       listContainerEl.prepend(newCard)
       evt.target.reset();
       popupFormBattonSave.setAttribute('disabled', true);
