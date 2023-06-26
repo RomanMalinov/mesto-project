@@ -7,7 +7,8 @@ import { closePopup, openPopup } from './modal.js';
 import { setStatusButton } from './utils.js'
 
 export { handleFormAddNewCard, addCard };
-import { getAllCards, getUserInfo, editProfile, addNewCard, deleteCardFrom, addLike, removeLike, changeAvatarImg } from './api.js'
+import { Api } from './api.js';
+export { api }
 import { data } from 'jquery';
 
 // массив карточек для предудущей проектной работы
@@ -34,9 +35,19 @@ import { data } from 'jquery';
 // }
 // renderCards(addCard);
 
+
+const config = {
+  baseUrl: 'https://nomoreparties.co/v1/plus-cohort-25',
+  headers: {
+    'content-type': 'application/json',
+    authorization: '4795c652-4f69-4cb4-b309-abc01e676f2c',
+  }
+}
+const api = new Api(config)
+
 let userId = null
 
-Promise.all([getUserInfo(), getAllCards()])
+Promise.all([api.getUserInfo(), api.getAllCards()])
   .then(([user, initialCards]) => {
     nameInput.textContent = user.name;
     jobInput.textContent = user.about;
@@ -65,7 +76,7 @@ function addCard(item) {
   } else {
     deleteButtonEl.addEventListener('click', deleteCard);
     function deleteCard(evt) {
-      deleteCardFrom(item._id)
+      api.deleteCardFrom(item._id)
         .then(() => {
           const targetEl = evt.target;
           const targetItem = targetEl.closest('.element');
@@ -83,14 +94,14 @@ function addCard(item) {
   }
   likeButtonEl.addEventListener('click', (evt) => {
     if (evt.target.classList.contains('element__like-button_activ')) {
-      removeLike(item._id)
+      api.removeLike(item._id)
         .then((res) => {
           likeButtonEl.classList.remove('element__like-button_activ');
           likeCount.textContent = res.likes.length;
         })
         .catch(err => console.log(err))
     } else {
-      addLike(item._id)
+      api.addLike(item._id)
         .then((res) => {
           likeButtonEl.classList.add('element__like-button_activ');
           likeCount.textContent = res.likes.length;
@@ -113,7 +124,7 @@ function addCard(item) {
 function handleFormAddNewCard(evt) {
   setStatusButton({ buttonEl: popupFormBattonSavenewCards, text: 'Сохраняем..', disabled: true })
   evt.preventDefault();
-  return addNewCard({ name: popupNewCardsNameInput.value, link: popupNewCardsLinkInput.value })  //?
+  return api.addNewCard({ name: popupNewCardsNameInput.value, link: popupNewCardsLinkInput.value })  //?
     .then(dataCard => {
       const newCard = addCard(dataCard);
       listContainerEl.prepend(newCard)

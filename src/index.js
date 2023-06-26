@@ -7,7 +7,7 @@ import {
 import { handleFormAddNewCard, addCard } from './components/card.js';
 import { hasInvalidInput, toggleButtonState, showInputError, hideInputError, checkInputValidity, setEventListeners, enableValidation } from './components/validate.js';
 import { closePopup, handleProfileFormSubmit, openPopup } from './components/modal.js'
-import { getAllCards, getUserInfo, editProfile, addNewCard, deleteCard, likesCards, deleteLikesCards, editAvatar } from './components/api.js'
+import { Api } from './components/api.js'
 
 
 popups.forEach((popup) => {

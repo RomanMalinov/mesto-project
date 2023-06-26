@@ -6,7 +6,8 @@ import {
   formPopupAvatar, popupAvatarLinkInput, profileAddAvatarButton, popupAvatar, popupImgAvatar, popupFormBattonSaveProfile, popupFormBattonSavenewCards, popupFormBattonSaveAvatar
 } from './constants.js';
 import { setStatusButton } from './utils.js'
-import { getAllCards, getUserInfo, editProfile, addNewCard, deleteCardFrom, addLike, removeLike, changeLikeStatus, changeAvatarImg } from './api.js'
+import { Api } from './api.js';
+import { api } from './card.js';
 // функции открытия и закрытия модальных окон
 // функции закрытия
 function closePopup(popup) {
@@ -33,7 +34,7 @@ function closeByEscape(evt) {
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   setStatusButton({ buttonEl: popupFormBattonSaveProfile, text: 'Сохраняем..' })
-  return editProfile({ name: popupProfileNameInput.value, about: popupProfilejobInput.value })
+  return api.editProfile({ name: popupProfileNameInput.value, about: popupProfilejobInput.value })
     .then(dataProfile => {
       nameInput.textContent = popupProfileNameInput.value;
       jobInput.textContent = popupProfilejobInput.value;
@@ -48,7 +49,7 @@ function handleAvatarFormSubmit(evt) {
   evt.preventDefault()
   setStatusButton({ buttonEl: popupFormBattonSaveAvatar, text: 'Сохраняем..' })
   popupFormBattonSave.textContent = 'Сохранение...'
-  return changeAvatarImg({ avatar: popupAvatarLinkInput.value })
+  return api.changeAvatarImg({ avatar: popupAvatarLinkInput.value })
     .then(avatarData => {
       popupImgAvatar.src = avatarData.avatar;
       closePopup(popupAvatar);
