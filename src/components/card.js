@@ -142,3 +142,30 @@ function handleFormAddNewCard(evt) {
 
 
 // Артём коммит
+
+export default class Card{
+  constructor(){
+
+  }
+
+  addNewCard(){
+
+  }
+
+  isLiked(){
+
+  }
+
+  setLike(){
+
+  }
+
+  setDeleteButtonState(){
+
+  }
+
+  deleteCard(){
+
+  }
+
+}
