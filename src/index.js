@@ -56,12 +56,13 @@ export let userId = null
 const api = new Api(config)
 
 
+
+
 Promise.all([api.getUserInfo(), api.getAllCards()])
   .then(([user, initialCards]) => {
     nameInput.textContent = user.name;
     jobInput.textContent = user.about;
     popupImgAvatar.src = user.avatar;
-    console.log(user)
     userId = user._id
     const newCards = initialCards.map(addCard);
     listContainerEl.append(...newCards)
