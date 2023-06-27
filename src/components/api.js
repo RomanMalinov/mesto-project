@@ -1,4 +1,3 @@
-console.log('test')
 export { Api }
 
 
@@ -95,6 +94,12 @@ class Api {
       body: JSON.stringify(avatarData)
     })
       .then(this.onResponse)
+  }
+
+  // добавил новый метод
+
+  initializeData(){
+    return Promise.all([this.getUserInfo(), this.getAllCards()]);
   }
 }
 

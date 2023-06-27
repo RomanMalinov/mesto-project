@@ -84,7 +84,6 @@ const api = new Api(config)
 
 
 function addCard(item) {
-  console.log(userId)
   const newItem = temlateEl.content.cloneNode(true);
   const captionEl = newItem.querySelector('.element__img-caption');
   const imageEl = newItem.querySelector('.element__img');
