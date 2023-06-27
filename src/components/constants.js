@@ -51,3 +51,7 @@ const popupFormBattonSavenewCards = document.querySelector('.popup__form-button-
 const popupFormBattonSaveAvatar = document.querySelector('.popup__form-button-save-avatar');
 
 
+
+// селектор для popup
+
+export const popupSelectorImage = '.popup_type_zoom-card'

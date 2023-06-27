@@ -21,7 +21,8 @@ import {
   popupNewCardsLinkInput,
   popupFormBattonSave,
   popupImgAvatar,
-  config
+  config,
+  popupSelectorImage
 } from './components/constants.js'
 
 import Card, { handleFormAddNewCard, addCard } from './components/card.js';
@@ -43,6 +44,7 @@ import {
 } from './components/modal.js'
 
 import { Api } from './components/api.js'
+import { PopupWithImage } from './components/PopUpWithImage';
 
 
 
@@ -57,6 +59,8 @@ export let userId = null
 
 
 const api = new Api(config)
+
+const imagePopUp = new PopupWithImage(popupSelectorImage);
 
 
 
