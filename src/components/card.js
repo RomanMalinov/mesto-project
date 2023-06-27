@@ -1,15 +1,41 @@
 import {
-  listContainerEl, temlateEl, popupProfile, popupAddNewCards, profileInfoEditButton, profileAddCardsButton, popupCards,
-  popupCardsImage, popupCardsText, popups, formPopupProfile, nameInput, jobInput, popupProfileNameInput,
-  popupProfilejobInput, formPopupNewCards, popupNewCardsNameInput, popupNewCardsLinkInput, popupFormBattonSave, popupImgAvatar, popupFormBattonSaveProfile, popupFormBattonSavenewCards, popupFormBattonSaveAvatar
+  listContainerEl,
+  temlateEl,
+  popupProfile,
+  popupAddNewCards,
+  profileInfoEditButton,
+  profileAddCardsButton,
+  popupCards,
+  popupCardsImage,
+  popupCardsText,
+  popups,
+  formPopupProfile,
+  nameInput,
+  jobInput,
+  popupProfileNameInput,
+  popupProfilejobInput,
+  formPopupNewCards,
+  popupNewCardsNameInput,
+  popupNewCardsLinkInput,
+  popupFormBattonSave,
+  popupImgAvatar,
+  popupFormBattonSaveProfile,
+  popupFormBattonSavenewCards,
+  popupFormBattonSaveAvatar,
+  config
 } from './constants.js'
+
 import { closePopup, openPopup } from './modal.js';
+
 import { setStatusButton } from './utils.js'
 
-export { handleFormAddNewCard, addCard };
 import { Api } from './api.js';
+
+import { userId } from '../index.js';
+
+export { handleFormAddNewCard, addCard };
+
 export { api }
-import { data } from 'jquery';
 
 // массив карточек для предудущей проектной работы
 // const catOne = new URL('../images/element__img-cat-7.jpg', import.meta.url);
@@ -33,45 +59,29 @@ import { data } from 'jquery';
 // }
 // renderCards(addCard);
 
-// объект конфигурации перенесен из api.js
-const config = {
-  baseUrl: 'https://nomoreparties.co/v1/plus-cohort-25',
-  headers: {
-    'content-type': 'application/json',
-    authorization: '4795c652-4f69-4cb4-b309-abc01e676f2c',
-  }
-}
+// объект конфигурации перенесен из api.js (перенесен в constants)
+
+
 
 // создан экземпляр класса Api и передан объект конфигурации
 const api = new Api(config)
 
-let userId = null
+// let userId = null  // перенес в index.js
 
-Promise.all([api.getUserInfo(), api.getAllCards()])
-  .then(([user, initialCards]) => {
-    nameInput.textContent = user.name;
-    jobInput.textContent = user.about;
-    popupImgAvatar.src = user.avatar;
-    console.log(user)
-    userId = user._id
-    const newCards = initialCards.map(addCard);
-    listContainerEl.append(...newCards)
-  })
-  .catch(err => console.log(err))
 
-/// -------------------тестирую подход
+// перенес в index.js
+// Promise.all([api.getUserInfo(), api.getAllCards()])
+//   .then(([user, initialCards]) => {
+//     nameInput.textContent = user.name;
+//     jobInput.textContent = user.about;
+//     popupImgAvatar.src = user.avatar;
+//     console.log(user)
+//     userId = user._id
+//     const newCards = initialCards.map(addCard);
+//     listContainerEl.append(...newCards)
+//   })
+//   .catch(err => console.log(err))
 
-  // Promise.all([api.getUserInfo(), api.getAllCards()])
-  // .then(([user, initialCards]) => {
-  //   nameInput.textContent = user.name;
-  //   jobInput.textContent = user.about;
-  //   popupImgAvatar.src = user.avatar;
-  //   console.log(user)
-  //   userId = user._id
-  //   const newCards = initialCards.map(generateNewCard());
-  //   listContainerEl.append(...newCards)
-  // })
-  // .catch(err => console.log(err))
 
 function addCard(item) {
   console.log(userId)
@@ -103,9 +113,18 @@ function addCard(item) {
   // лайк карточек
   const likeCount = newItem.querySelector('.element__like-counter');
   likeCount.textContent = item.likes.length;
-  if (item.likes.find((like) => like.id == userId)) {
-    likeButtonEl.classList.add('element__like-button_activ');
+
+//-------- Исправил ошибку, лайки ставились и отображались неправильно
+
+  // if (item.likes.find((like) => like.id == userId)) {
+  //   likeButtonEl.classList.add('element__like-button_activ');
+  // }
+
+//-------- Ниже исправление
+  if(item.likes.some((like) => like._id === userId)){
+    likeButtonEl.classList.add('element__like-button_activ')
   }
+
   likeButtonEl.addEventListener('click', (evt) => {
     if (evt.target.classList.contains('element__like-button_activ')) {
       api.removeLike(item._id)
@@ -158,16 +177,16 @@ function handleFormAddNewCard(evt) {
 // Артём коммит
 
 export default class Card{
-  constructor({likes, name, owner, _id},  ){
+  constructor({likes, name, owner, _id}, {likeClick} ){
     this.likes = likes;
     this.name = name;
     this.owner = owner;
     this._id = _id;
+    this._likeClick = likeClick
   }
 
   _getCardTemplate(){
     const cardElement = document.querySelector('.template').content.cloneNode(true);
-
     return cardElement
   }
 
@@ -185,15 +204,23 @@ export default class Card{
     this._setLikeButtonState();
     this._setDeleteButtonState();
     this._setEventListeners();
+
+    return this._card
   }
 
-  _setLikeButtonState(){
-    if (this.likes.find((like) => like.id == userId)) {
+  setLikeButtonState(){
+    if (this.isCardLiked){
+      this.likeButtonEl.classList.remove('element__like-button_activ');
+    } else {
       this.likeButtonEl.classList.add('element__like-button_activ');
     }
   }
 
-  setLike(){
+  _isCardLiked(){
+    return this._isCardLiked;
+  }
+
+  _setLike(){
 
   }
 
@@ -201,7 +228,7 @@ export default class Card{
 
   }
 
-  deleteCard(){
+  _deleteCard(){
     this._card.remove()
   }
 
@@ -210,7 +237,7 @@ export default class Card{
       
     })
     this.likeButtonEl.addEventListener('click', () => {
-      
+      this._likeClick();
     })
     this.imageEl.addEventListener('click', () => {
       

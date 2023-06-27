@@ -1,6 +1,7 @@
 console.log('test')
 export { Api }
 
+
 // Объект конфигурации перенесен в секцию  card.js
 //  const config = {
 //    baseUrl: 'https://nomoreparties.co/v1/plus-cohort-25',
