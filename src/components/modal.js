@@ -10,6 +10,8 @@ import { Api } from './api.js';
 import { api } from './card.js';
 // функции открытия и закрытия модальных окон
 // функции закрытия
+
+// три функции перенесены в класс popup, после рефакторинга ООH удалить
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closeByEscape);

@@ -9,7 +9,7 @@ import { hasInvalidInput, toggleButtonState, showInputError, hideInputError, che
 import { closePopup, handleProfileFormSubmit, openPopup } from './components/modal.js'
 import { Api } from './components/api.js'
 
-
+// после рефакторинга ООП удалить
 popups.forEach((popup) => {
   popup.addEventListener('mousedown', (evt) => {
     if (evt.target.classList.contains('popup_opened')) {
