@@ -1,7 +1,7 @@
 console.log('test')
 export { Api }
 
-// Объект конфигурации
+// Объект конфигурации перенесен в секцию  card.js
 //  const config = {
 //    baseUrl: 'https://nomoreparties.co/v1/plus-cohort-25',
 //    headers: {
@@ -12,7 +12,7 @@ export { Api }
 
 
 // класс Api рефакторинг ООП
- class Api {
+class Api {
   constructor(config) {
     this._baseUrl = config.baseUrl;
     this._headers = config.headers;
@@ -40,7 +40,7 @@ export { Api }
   }
 
   //редактирование профиля пользователя
- editProfile(dataProfile) {
+  editProfile(dataProfile) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
       headers: this._headers,

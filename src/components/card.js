@@ -27,15 +27,13 @@ import { data } from 'jquery';
 //   { name: 'Ромашки', link: catSix }
 // ];
 //функция рендеринга карточек
-
-
 // function renderCards(addCard) {
 //   // const newCards = initialCards.map(addCard);
 //   //  listContainerEl.append(...newCards)
 // }
 // renderCards(addCard);
 
-
+// объект конфигурации перенесен из api.js
 const config = {
   baseUrl: 'https://nomoreparties.co/v1/plus-cohort-25',
   headers: {
@@ -43,6 +41,8 @@ const config = {
     authorization: '4795c652-4f69-4cb4-b309-abc01e676f2c',
   }
 }
+
+// создан экземпляр класса Api и передан объект конфигурации
 const api = new Api(config)
 
 let userId = null

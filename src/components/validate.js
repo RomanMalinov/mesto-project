@@ -1,5 +1,21 @@
 export { enableValidation };
 
+// Создание класса FormValidator
+class FormValidator {
+  constructor() {
+  }
+  enableValidation() {
+
+  }
+
+  
+}
+
+
+
+
+
+// старый код до рефакторинга на ООП
 //Кнопки
 function hasInvalidInput(inputList) {
   return inputList.some((inputElement) => {
