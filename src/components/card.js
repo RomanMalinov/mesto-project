@@ -59,6 +59,20 @@ Promise.all([api.getUserInfo(), api.getAllCards()])
   })
   .catch(err => console.log(err))
 
+/// -------------------тестирую подход
+
+  // Promise.all([api.getUserInfo(), api.getAllCards()])
+  // .then(([user, initialCards]) => {
+  //   nameInput.textContent = user.name;
+  //   jobInput.textContent = user.about;
+  //   popupImgAvatar.src = user.avatar;
+  //   console.log(user)
+  //   userId = user._id
+  //   const newCards = initialCards.map(generateNewCard());
+  //   listContainerEl.append(...newCards)
+  // })
+  // .catch(err => console.log(err))
+
 function addCard(item) {
   console.log(userId)
   const newItem = temlateEl.content.cloneNode(true);
@@ -144,28 +158,63 @@ function handleFormAddNewCard(evt) {
 // Артём коммит
 
 export default class Card{
-  constructor(){
-
+  constructor({likes, name, owner, _id},  ){
+    this.likes = likes;
+    this.name = name;
+    this.owner = owner;
+    this._id = _id;
   }
 
-  addNewCard(){
+  _getCardTemplate(){
+    const cardElement = document.querySelector('.template').content.cloneNode(true);
 
+    return cardElement
   }
 
-  isLiked(){
+  generateNewCard(){
+    this._card = this._getCardTemplate();
+    this.captionEl = _card.querySelector('.element__img-caption');
+    this.imageEl = _card.querySelector('.element__img');
+    this.likeButtonEl = _card.querySelector('.element__like-button');
+    this.deleteButtonEl = _card.querySelector('.element__delete-button');
+    this.likeCount = _card.querySelector('.element__like-counter');
+    this.captionEl.textContent = this.name;
+    this.imageEl.src = this.link;
+    this.imageEl.alt = this.name;
+    this.likeCount.textContent = this.likes.length;
+    this._setLikeButtonState();
+    this._setDeleteButtonState();
+    this._setEventListeners();
+  }
 
+  _setLikeButtonState(){
+    if (this.likes.find((like) => like.id == userId)) {
+      this.likeButtonEl.classList.add('element__like-button_activ');
+    }
   }
 
   setLike(){
 
   }
 
-  setDeleteButtonState(){
+  _setDeleteButtonState(){
 
   }
 
   deleteCard(){
+    this._card.remove()
+  }
 
+  _setEventListeners(){
+    this.deleteButtonEl.addEventListener('click', () => {
+      
+    })
+    this.likeButtonEl.addEventListener('click', () => {
+      
+    })
+    this.imageEl.addEventListener('click', () => {
+      
+    })
   }
 
 }
