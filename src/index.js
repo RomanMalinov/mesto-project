@@ -45,6 +45,7 @@ import {
 
 import { Api } from './components/api.js'
 import { PopupWithImage } from './components/PopUpWithImage';
+import Section from './components/Section';
 
 
 
@@ -65,21 +66,31 @@ const imagePopUp = new PopupWithImage(popupSelectorImage);
 
 
 
-Promise.all([api.getUserInfo(), api.getAllCards()])
-  .then(([user, initialCards]) => {
-    nameInput.textContent = user.name;
-    jobInput.textContent = user.about;
-    popupImgAvatar.src = user.avatar;
-    userId = user._id
-    const newCards = initialCards.map(addCard);
-    listContainerEl.append(...newCards)
+
+
+api.initializeData()
+.then(([user, initialCards]) => {
+
+  user.setUserInfo();
+  const userId = user.getUserInfo()._id;
+
+    // nameInput.textContent = user.name;
+    // jobInput.textContent = user.about;
+    // popupImgAvatar.src = user.avatar;
+    // userId = user._id
+    // const newCards = initialCards.map(addCard);
+    // listContainerEl.append(...newCards)
+
+  const cardList = new Section({
+    
+  })
+
+
   })
   .catch(err => console.log(err))
 
 
-//   const card = new Card({
-//   user, initialCards
-// })
+
 
 export function likeClick(card, data){
   let promise = null
@@ -98,11 +109,20 @@ export function likeClick(card, data){
   })
 }
 
-
 /// --------------Ниже старый код
 
 
 
+Promise.all([api.getUserInfo(), api.getAllCards()])
+  .then(([user, initialCards]) => {
+    nameInput.textContent = user.name;
+    jobInput.textContent = user.about;
+    popupImgAvatar.src = user.avatar;
+    userId = user._id
+    const newCards = initialCards.map(addCard);
+    listContainerEl.append(...newCards)
+  })
+  .catch(err => console.log(err))
 
 
 popups.forEach((popup) => {
