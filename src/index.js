@@ -44,9 +44,9 @@ import {
 
 import { Api } from './components/api.js'
 
-<<<<<<< HEAD
-// после рефакторинга ООП удалить
-=======
+
+
+
 export let userId = null
 
 
@@ -100,7 +100,7 @@ export function likeClick(card, data){
 
 
 
->>>>>>> adeb0550c808ada8858f60ae5428fa213e4bfb2d
+
 popups.forEach((popup) => {
   popup.addEventListener('mousedown', (evt) => {
     if (evt.target.classList.contains('popup_opened')) {
@@ -133,8 +133,3 @@ enableValidation({
   inputErrorClass: 'form__input-error',
   errorClass: 'form__input-error_active'
 });
-<<<<<<< HEAD
-=======
-
-
->>>>>>> adeb0550c808ada8858f60ae5428fa213e4bfb2d
