@@ -83,6 +83,10 @@ const api = new Api(config)
 //   .catch(err => console.log(err))
 
 
+
+
+
+
 function addCard(item) {
   const newItem = temlateEl.content.cloneNode(true);
   const captionEl = newItem.querySelector('.element__img-caption');
@@ -112,6 +116,11 @@ function addCard(item) {
   // лайк карточек
   const likeCount = newItem.querySelector('.element__like-counter');
   likeCount.textContent = item.likes.length;
+
+
+
+
+
 
 //-------- Исправил ошибку, лайки ставились и отображались неправильно
 
@@ -178,97 +187,80 @@ function handleFormAddNewCard(evt) {
 export default class Card{
 
 
-  constructor({likes, name, owner, _id, link},
+  constructor(
+    item,
     userId,
     handleImageClick,
-    {handleDeleteCard,
-    handleLikeCard,
-    handleDislikeCard}
+    {deleteCard,
+    addLike,
+    removeLike}
     ){
-    /// возможно деструктуризация item не сработает, и придется прописать this._likes = item.likes
-    this.likes = likes;
-    this.name = name;
-    this.owner = owner;
-    this._id = _id;
-    this.link = link;
 
+    this._item = item.item;
+    this.likes = item.likes;
+    this.name = item.name;
+    this.owner = item.owner;
+    this._id = item._id;
+    this.link = item.link;
     this.userId = userId;
 
     this.handleImageClick = handleImageClick;
+    this.deleteCard = deleteCard;
+    this.addLike = addLike;
+    this.removeLike = removeLike;
 
-    this.handleDeleteCard = handleDeleteCard;
-    this.handleLikeCard = handleLikeCard;
-    this.handleDislikeCard = handleDislikeCard;
+    this.cardElement = document.querySelector('.template').content.cloneNode(true);
+    this.captionEl = this.cardElement.querySelector('.element__img-caption');
+    this.imageEl = this.cardElement.querySelector('.element__img');
+    this.likeButtonEl = this.cardElement.querySelector('.element__like-button');
+    this.deleteButtonEl = this.cardElement.querySelector('.element__delete-button');
+    this.likeCount = this.cardElement.querySelector('.element__like-counter');
   }
 
-  _getCardTemplate(){
-    const cardElement = document.querySelector('.template').content.cloneNode(true);
-    return cardElement
-  }
+  // _getCardTemplate(){
+
+  //   return cardElement;
+  // }
 
   generateNewCard(){
-    this._card = this._getCardTemplate();
-
-    this.captionEl = _card.querySelector('.element__img-caption');
-    this.imageEl = _card.querySelector('.element__img');
-    this.likeButtonEl = _card.querySelector('.element__like-button');
-    this.deleteButtonEl = _card.querySelector('.element__delete-button');
-    this.likeCount = _card.querySelector('.element__like-counter');
+    // const _card = this._getCardTemplate();
 
     this.captionEl.textContent = this.name;
+
     this.imageEl.src = this.link;
+
     this.imageEl.alt = this.name;
+
     this.likeCount.textContent = this.likes.length;
 
-    this._setLikeButtonState();
-    this._setDeleteButtonState();
     this._setEventListeners();
 
-    return this._card
+    return this.cardElement
   }
 
-  setLikeButtonState(){
-    if (this.isCardLiked){
-      this.likeButtonEl.classList.add('element__like-button_activ');
-    } else {
-      this.likeButtonEl.classList.remove('element__like-button_activ');
-    }
+  deleteCard(){
+    this.cardElement.remove()
   }
 
-  _isCardLiked(){
-    let result = false;
-    this.likes.forEach((like) => {
-      if (like._id === this._userId){
-        result = true;
-      }
-    })
-
-    return result
+  addLike(data){
+    this.likeButtonEl.classList.add("element__like-button_activ");
+    this.likeCount.textContent = data.likes.length;
   }
 
-  _setDeleteButtonState(){
-    if (item.owner._id !== userId) {
-      deleteButtonEl.remove()
-    } else {
-      deleteButtonEl.addEventListener('click', deleteCard);
-    }
+  removeLike(data){
+    this.likeButtonEl.classList.remove("element__like-button_activ");
+    this.countLike.textContent = data.likes.length;
   }
-
-  _deleteCard(){
-    this._card.remove()
-  }
-
-/// запросы типа handleDeleteCard = api.deleteCardFrom
 
   _setEventListeners(){
     this.deleteButtonEl.addEventListener('click', () => {
-      handleDeleteCard(this._card)
+      removeLike(this.item)
     })
     this.likeButtonEl.addEventListener('click', () => {
       if (evt.target.classList.contains('element__like-button_activ')){
-        this.handleDislikeCard(this._card)
+        this.removeLike(this.item)
       } else {
-        this.handleLikeCard(this._card)
+        this.addLike(this.item)
       }
     })
     this.imageEl.addEventListener('click', () => {

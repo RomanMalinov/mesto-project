@@ -49,15 +49,19 @@ import {
 import { Api } from './components/api.js'
 import { PopupWithImage } from './components/PopUpWithImage';
 import { UserInfo } from './components/userInfo';
-import Section from './components/Section';
+import {Section} from './components/Section';
 import PopupWithForm from './components/PopupWithForm';
 
 
 
 
 export let userId = null
+let cardElement;
 
 
+const selectorUserName = '.profile__info-title';
+const selectorUserAbout = '.profile__info-subtitle';
+const selectorUserAvatar = '.profile__image';
 
 
 
@@ -67,9 +71,9 @@ const api = new Api(config)
 
 // создание экземпляра класса c данными пользователя
 const userInfo = new UserInfo({
-  selectorUserName: '.profile__info-title',
-  selectorUserAbout: '.profile__info-subtitle',
-  selectorUserAvatar: '.profile__image'
+  selectorUserName,
+  selectorUserAbout,
+  selectorUserAvatar
 });
 //
 
@@ -90,15 +94,48 @@ const editProfilePopup = new PopupWithForm('.popup_type_profile');
 
 api.initializeData()
 .then(([user, initialCards]) =>{
-  userInfo.setUserInfo(user.name, user.about, user.avatar);
+  userInfo.setUserInfo(user);
+  userId = user._id;
   const cardList = new Section({
-
+    renderer: (item) => {
+      cardElement = createCard(item);
+      cardList.setItem(cardElement);
+    }
+  }, '.elements');
+  cardList.renderItems(initialCards)
   })
+  .catch((err) => console.log(err))
 
-
-  })
-  .catch(err => console.log(err))
-
+const createCard = (item) => {
+  const cardCreate = new Card(item, userId, imagePopup,
+    {deleteCard: (item) => {
+      api.deleteCard(item._id)
+    .then(() => {
+      cardCreate.deleteCard();
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+    },
+    addLike: (item) => {
+      api.addLike(item._id)
+        .then((data) => {
+          cardCreate.addLike(data);
+        })
+        .catch((err) => {
+          console.error(err)
+        })},
+    removeLike: (item) => {
+      api.removeLike(item._id)
+        .then((data) => {
+          cardCreate.removeLike(data);
+        })
+        .catch((err) => {
+          console.error(err)
+        })
+    }});
+    return cardCreate.generateNewCard();
+}
 
 // возможно, ненужный код
 
@@ -123,28 +160,28 @@ api.initializeData()
 
 
 
-Promise.all([api.getUserInfo(), api.getAllCards()])
-  .then(([user, initialCards]) => {
-    nameInput.textContent = user.name;
-    jobInput.textContent = user.about;
-    popupImgAvatar.src = user.avatar;
-    userId = user._id
-    const newCards = initialCards.map(addCard);
-    listContainerEl.append(...newCards)
-  })
-  .catch(err => console.log(err))
+// Promise.all([api.getUserInfo(), api.getAllCards()])
+//   .then(([user, initialCards]) => {
+//     nameInput.textContent = user.name;
+//     jobInput.textContent = user.about;
+//     popupImgAvatar.src = user.avatar;
+//     userId = user._id
+//     const newCards = initialCards.map(addCard);
+//     listContainerEl.append(...newCards)
+//   })
+//   .catch(err => console.log(err))
 
 
-popups.forEach((popup) => {
-  popup.addEventListener('mousedown', (evt) => {
-    if (evt.target.classList.contains('popup_opened')) {
-      closePopup(popup)
-    }
-    if (evt.target.classList.contains('popup__close')) {
-      closePopup(popup)
-    }
-  })
-})
+// popups.forEach((popup) => {
+//   popup.addEventListener('mousedown', (evt) => {
+//     if (evt.target.classList.contains('popup_opened')) {
+//       closePopup(popup)
+//     }
+//     if (evt.target.classList.contains('popup__close')) {
+//       closePopup(popup)
+//     }
+//   })
+// })
 
 formPopupNewCards.addEventListener('submit', handleFormAddNewCard);
 

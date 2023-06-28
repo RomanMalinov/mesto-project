@@ -3,9 +3,12 @@ export { UserInfo }
 // Создание класса UserInfo
 class UserInfo {
   constructor( {selectorUserName, selectorUserAbout, selectorUserAvatar }) {
-    this.userName = document.querySelector(selectorUserName);
-    this.userAbout = document.querySelector(selectorUserAbout);
-    this.userAvatar = document.querySelector(selectorUserAvatar);
+    this._selectorUserName = selectorUserName;
+    this._selectorUserAbout = selectorUserAbout;
+    this._selectorUserAvatar = selectorUserAvatar;
+    this._userName = document.querySelector(selectorUserName);
+    this._userAbout = document.querySelector(selectorUserAbout);
+    this._userAvatar = document.querySelector(selectorUserAvatar);
   }
 
   getUserInfo() {
@@ -16,11 +19,10 @@ class UserInfo {
     }
   }
 
-  setUserInfo({ userName, userAbout, userAvatar }) {
-    this.userName.textContent = userName,
-      this.userAbout.textContent = userAbout,
-      this.userAvatar.src = userAvatar
-
+  setUserInfo(data) {
+    this._userName.textContent = data.name;
+    this._userAbout.textContent = data.about;
+    this._userAvatar.src = data.avatar;
   }
 
 }
