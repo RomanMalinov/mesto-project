@@ -48,6 +48,7 @@ import {
 
 import { Api } from './components/api.js'
 import { PopupWithImage } from './components/PopUpWithImage';
+import { UserInfo } from './components/userInfo';
 import Section from './components/Section';
 import PopupWithForm from './components/PopupWithForm';
 
@@ -59,11 +60,19 @@ export let userId = null
 
 
 
-/// --------------Артём
 
 
 
 const api = new Api(config)
+
+// создание экземпляра класса c данными пользователя
+const userInfo = new UserInfo({
+  selectorUserName: '.profile__info-title',
+  selectorUserAbout: '.profile__info-subtitle',
+  selectorUserAvatar: '.profile__image'
+});
+//
+
 
 const imagePopup = new PopupWithImage('.popup_type_zoom-card');
 // imagePopup передадим в Card как handleImageClick
@@ -80,18 +89,8 @@ const editProfilePopup = new PopupWithForm('.popup_type_profile');
 // доработать код когда будет UserInfo класс, этот код заменит Promise.all часть
 
 api.initializeData()
-.then(([user, initialCards]) => {
-
-  user.setUserInfo();
-  const userId = user.getUserInfo()._id;
-
-    // nameInput.textContent = user.name;
-    // jobInput.textContent = user.about;
-    // popupImgAvatar.src = user.avatar;
-    // userId = user._id
-    // const newCards = initialCards.map(addCard);
-    // listContainerEl.append(...newCards)
-
+.then(([user, initialCards]) =>{
+  userInfo.setUserInfo(user.name, user.about, user.avatar);
   const cardList = new Section({
 
   })
@@ -189,9 +188,4 @@ avatarFormValidator.enableValidation();
 const newCardsFormValidator = new FormValidator(configSelecor, formPopupNewCards)
 newCardsFormValidator.enableValidation();
 
-//создание экземпляра класса c данными пользователя
-// userInfo = new UserInfo({
-//   selectorUserName: ;
-//   selectorUserAbout: ;
-// });
-// //
+

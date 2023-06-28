@@ -21,10 +21,10 @@ class FormValidator {
   toggleButtonState(inputList, buttonElement, inactiveButtonClass) {
     if (this.hasInvalidInput(inputList)) {
       this.buttonElement.setAttribute('disabled', true);
-      this.buttonElement.classList.add(inactiveButtonClass);
+      this.buttonElement.classList.add(this.configSelecor.inactiveButtonClass);
     } else {
       this.buttonElement.removeAttribute('disabled');
-      this.buttonElement.classList.remove(inactiveButtonClass);
+      this.buttonElement.classList.remove(this.configSelecor.inactiveButtonClass);
     }
   }
 
