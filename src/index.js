@@ -22,20 +22,23 @@ import {
   popupFormBattonSave,
   popupImgAvatar,
   config,
-  popupSelectorImage
+  popupSelectorImage,
+  formPopupAvatar
 } from './components/constants.js'
 
 import Card, { handleFormAddNewCard, addCard } from './components/card.js';
 
-import {
-  hasInvalidInput,
-  toggleButtonState,
-  showInputError,
-  hideInputError,
-  checkInputValidity,
-  setEventListeners,
-  enableValidation
-} from './components/validate.js';
+// import {
+//   hasInvalidInput,
+//   toggleButtonState,
+//   showInputError,
+//   hideInputError,
+//   checkInputValidity,
+//   setEventListeners,
+//   enableValidation
+// } from './components/validate.js';
+
+import { FormValidator } from './components/validate.js';
 
 import {
   closePopup,
@@ -129,11 +132,31 @@ profileInfoEditButton.addEventListener('click', () => {
   openPopup(popupProfile)
 });
 
-enableValidation({
+// enableValidation({
+//   formSelector: '.popup__form',
+//   inputSelector: '.popup__form-input',
+//   submitButtonSelector: '.popup__form-button-save',
+//   inactiveButtonClass: 'button_inactive',
+//   inputErrorClass: 'form__input-error',
+//   errorClass: 'form__input-error_active'
+// });
+
+//селкторы вынесены в объект конфигурации
+const configSelecor = {
   formSelector: '.popup__form',
   inputSelector: '.popup__form-input',
   submitButtonSelector: '.popup__form-button-save',
   inactiveButtonClass: 'button_inactive',
   inputErrorClass: 'form__input-error',
   errorClass: 'form__input-error_active'
-});
+};
+
+// для каждой проверяемой формы создаем экземпляра класса
+const profileFormValidator = new FormValidator(configSelecor, formPopupProfile)
+profileFormValidator.enableValidation();
+
+const avatarFormValidator = new FormValidator(configSelecor, formPopupAvatar)
+avatarFormValidator.enableValidation();
+
+const newCardsFormValidator = new FormValidator(configSelecor, formPopupNewCards)
+newCardsFormValidator.enableValidation();
