@@ -50,8 +50,6 @@ import { Api } from './components/api.js'
 import { PopupWithImage } from './components/PopUpWithImage';
 import Section from './components/Section';
 import PopupWithForm from './components/PopupWithForm';
-import { UserInfo } from './components/userInfo';
-
 
 
 
@@ -95,7 +93,7 @@ api.initializeData()
     // listContainerEl.append(...newCards)
 
   const cardList = new Section({
-    
+
   })
 
 

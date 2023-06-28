@@ -1,21 +1,15 @@
-import {listContainerEl} from '../components/constants'
-
-export default class Section{
-    constuctor({items, renderer}, selector){
-        this._data = items;
+export default class Section {
+    constructor({ data, renderer }, selector) {
+        this._renderedItems = data;
         this._renderer = renderer;
         this._container = document.querySelector(selector);
     }
 
-    rederItems(){
-        this._data.forEach((item) => {
-            this.addCard(item)
-        })
+    renderItems() {
+      this._renderedItems.forEach(item => this._renderer(item))
     }
 
-    addCard(item){
-        this._container.prepend(this._renderer(item))
+    setItem(element) {
+      this._container.prepend(element);
     }
-}
-
-
+  }
