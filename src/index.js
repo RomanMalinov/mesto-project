@@ -48,8 +48,8 @@ import {
 
 import { Api } from './components/api.js'
 import { PopupWithImage } from './components/PopUpWithImage';
-import { UserInfo } from './components/userInfo';
-
+import Section from './components/Section';
+import PopupWithForm from './components/PopupWithForm';
 
 
 
@@ -65,8 +65,62 @@ export let userId = null
 
 const api = new Api(config)
 
-const imagePopUp = new PopupWithImage(popupSelectorImage);
+const imagePopup = new PopupWithImage('.popup_type_zoom-card');
+// imagePopup передадим в Card как handleImageClick
 
+const editAvatarPopup = new PopupWithForm('.popup_type_add__img-avatar');
+
+const addNewCardPopup = new PopupWithForm('.popup_type_add_new-cards');
+
+const editProfilePopup = new PopupWithForm('.popup_type_profile');
+
+
+
+
+// доработать код когда будет UserInfo класс, этот код заменит Promise.all часть
+
+api.initializeData()
+.then(([user, initialCards]) => {
+
+  user.setUserInfo();
+  const userId = user.getUserInfo()._id;
+
+    // nameInput.textContent = user.name;
+    // jobInput.textContent = user.about;
+    // popupImgAvatar.src = user.avatar;
+    // userId = user._id
+    // const newCards = initialCards.map(addCard);
+    // listContainerEl.append(...newCards)
+
+  const cardList = new Section({
+
+  })
+
+
+  })
+  .catch(err => console.log(err))
+
+
+// возможно, ненужный код
+
+// export function likeClick(card, data){
+//   let promise = null
+
+//   if (card.isCardLiked()){
+//     promise = api.removeLike(data._id)
+//   } else{
+//     promise = api.addLikeLike(data._id)
+//   }
+//   promise
+//   .then(data => {
+//     card.setLikeButtonState(data)
+//   })
+//   .catch(err => {
+//     console.log(err)
+//   })
+// }
+
+/// --------------Ниже старый код
 
 
 
@@ -80,34 +134,6 @@ Promise.all([api.getUserInfo(), api.getAllCards()])
     listContainerEl.append(...newCards)
   })
   .catch(err => console.log(err))
-
-
-//   const card = new Card({
-//   user, initialCards
-// })
-
-export function likeClick(card, data){
-  let promise = null
-
-  if (card.isCardLiked()){
-    promise = api.removeLike(data._id)
-  } else{
-    promise = api.addLikeLike(data._id)
-  }
-  promise
-  .then(data => {
-    card.setLikeButtonState(data)
-  })
-  .catch(err => {
-    console.log(err)
-  })
-}
-
-
-/// --------------Ниже старый код
-
-
-
 
 
 popups.forEach((popup) => {

@@ -173,15 +173,32 @@ function handleFormAddNewCard(evt) {
 
 
 
-// Артём коммит
+// Card class ----------------------------------------------------------------------------------
 
 export default class Card{
-  constructor({likes, name, owner, _id}, {likeClick} ){
+
+
+  constructor({likes, name, owner, _id, link},
+    userId,
+    handleImageClick,
+    {handleDeleteCard,
+    handleLikeCard,
+    handleDislikeCard}
+    ){
+    /// возможно деструктуризация item не сработает, и придется прописать this._likes = item.likes
     this.likes = likes;
     this.name = name;
     this.owner = owner;
     this._id = _id;
-    this._likeClick = likeClick
+    this.link = link;
+
+    this.userId = userId;
+
+    this.handleImageClick = handleImageClick;
+
+    this.handleDeleteCard = handleDeleteCard;
+    this.handleLikeCard = handleLikeCard;
+    this.handleDislikeCard = handleDislikeCard;
   }
 
   _getCardTemplate(){
@@ -191,15 +208,18 @@ export default class Card{
 
   generateNewCard(){
     this._card = this._getCardTemplate();
+
     this.captionEl = _card.querySelector('.element__img-caption');
     this.imageEl = _card.querySelector('.element__img');
     this.likeButtonEl = _card.querySelector('.element__like-button');
     this.deleteButtonEl = _card.querySelector('.element__delete-button');
     this.likeCount = _card.querySelector('.element__like-counter');
+
     this.captionEl.textContent = this.name;
     this.imageEl.src = this.link;
     this.imageEl.alt = this.name;
     this.likeCount.textContent = this.likes.length;
+
     this._setLikeButtonState();
     this._setDeleteButtonState();
     this._setEventListeners();
@@ -209,37 +229,50 @@ export default class Card{
 
   setLikeButtonState(){
     if (this.isCardLiked){
-      this.likeButtonEl.classList.remove('element__like-button_activ');
-    } else {
       this.likeButtonEl.classList.add('element__like-button_activ');
+    } else {
+      this.likeButtonEl.classList.remove('element__like-button_activ');
     }
   }
 
   _isCardLiked(){
-    return this._isCardLiked;
-  }
+    let result = false;
+    this.likes.forEach((like) => {
+      if (like._id === this._userId){
+        result = true;
+      }
+    })
 
-  _setLike(){
-
+    return result
   }
 
   _setDeleteButtonState(){
-
+    if (item.owner._id !== userId) {
+      deleteButtonEl.remove()
+    } else {
+      deleteButtonEl.addEventListener('click', deleteCard);
+    }
   }
 
   _deleteCard(){
     this._card.remove()
   }
 
+/// запросы типа handleDeleteCard = api.deleteCardFrom
+
   _setEventListeners(){
     this.deleteButtonEl.addEventListener('click', () => {
-      
+      handleDeleteCard(this._card)
     })
     this.likeButtonEl.addEventListener('click', () => {
-      this._likeClick();
+      if (evt.target.classList.contains('element__like-button_activ')){
+        this.handleDislikeCard(this._card)
+      } else {
+        this.handleLikeCard(this._card)
+      }
     })
     this.imageEl.addEventListener('click', () => {
-      
+      this.handleImageClick.open(this.name, this.link)
     })
   }
 
