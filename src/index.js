@@ -48,6 +48,8 @@ import {
 
 import { Api } from './components/api.js'
 import { PopupWithImage } from './components/PopUpWithImage';
+import { UserInfo } from './components/userInfo';
+
 
 
 
@@ -160,3 +162,10 @@ avatarFormValidator.enableValidation();
 
 const newCardsFormValidator = new FormValidator(configSelecor, formPopupNewCards)
 newCardsFormValidator.enableValidation();
+
+//создание экземпляра класса c данными пользователя
+// userInfo = new UserInfo({
+//   selectorUserName: ;
+//   selectorUserAbout: ;
+// });
+// //
