@@ -173,15 +173,32 @@ function handleFormAddNewCard(evt) {
 
 
 
-// Артём коммит
+// Card class ----------------------------------------------------------------------------------
 
 export default class Card{
-  constructor({likes, name, owner, _id}, {likeClick} ){
+
+
+  constructor({likes, name, owner, _id, link},
+    userId,
+    handleImageClick,
+    {handleDeleteCard,
+    handleLikeCard,
+    handleDislikeCard}
+    ){
+    /// возможно деструктуризация item не сработает, и придется прописать this._likes = item.likes
     this.likes = likes;
     this.name = name;
     this.owner = owner;
     this._id = _id;
-    this._likeClick = likeClick;
+    this.link = link;
+
+    this.userId = userId;
+
+    this.handleImageClick = handleImageClick;
+
+    this.handleDeleteCard = handleDeleteCard;
+    this.handleLikeCard = handleLikeCard;
+    this.handleDislikeCard = handleDislikeCard;
   }
 
   _getCardTemplate(){
@@ -220,7 +237,6 @@ export default class Card{
 
   _isCardLiked(){
     let result = false;
-    
     this.likes.forEach((like) => {
       if (like._id === this._userId){
         result = true;
@@ -228,10 +244,6 @@ export default class Card{
     })
 
     return result
-  }
-
-  _setLike(){
-
   }
 
   _setDeleteButtonState(){
@@ -246,15 +258,21 @@ export default class Card{
     this._card.remove()
   }
 
+/// запросы типа handleDeleteCard = api.deleteCardFrom
+
   _setEventListeners(){
     this.deleteButtonEl.addEventListener('click', () => {
-      
+      handleDeleteCard(this._card)
     })
     this.likeButtonEl.addEventListener('click', () => {
-      this._likeClick();
+      if (evt.target.classList.contains('element__like-button_activ')){
+        this.handleDislikeCard(this._card)
+      } else {
+        this.handleLikeCard(this._card)
+      }
     })
     this.imageEl.addEventListener('click', () => {
-      
+      this.handleImageClick.open(this.name, this.link)
     })
   }
 
