@@ -109,7 +109,7 @@ api.initializeData()
 const createCard = (item) => {
   const cardCreate = new Card(item, userId, imagePopup,
     {deleteCard: (item) => {
-      api.deleteCard(item._id)
+      api.deleteCardFrom(item._id)
     .then(() => {
       cardCreate.deleteCard();
     })
@@ -134,6 +134,7 @@ const createCard = (item) => {
           console.error(err)
         })
     }});
+
     return cardCreate.generateNewCard();
 }
 

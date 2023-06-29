@@ -117,11 +117,6 @@ function addCard(item) {
   const likeCount = newItem.querySelector('.element__like-counter');
   likeCount.textContent = item.likes.length;
 
-
-
-
-
-
 //-------- Исправил ошибку, лайки ставились и отображались неправильно
 
   // if (item.likes.find((like) => like.id == userId)) {
@@ -129,6 +124,7 @@ function addCard(item) {
   // }
 
 //-------- Ниже исправление
+
   if(item.likes.some((like) => like._id === userId)){
     likeButtonEl.classList.add('element__like-button_activ')
   }
@@ -196,7 +192,7 @@ export default class Card{
     removeLike}
     ){
 
-    this._item = item.item;
+    this.item = item;
     this.likes = item.likes;
     this.name = item.name;
     this.owner = item.owner;
@@ -226,12 +222,17 @@ export default class Card{
     // const _card = this._getCardTemplate();
 
     this.captionEl.textContent = this.name;
-
     this.imageEl.src = this.link;
-
     this.imageEl.alt = this.name;
-
     this.likeCount.textContent = this.likes.length;
+
+    if(this.likes.some((like) => like._id === userId)){
+      this.likeButtonEl.classList.add('element__like-button_activ')
+    }
+
+    if (this.owner._id !== userId) {
+      this.deleteButtonEl.remove()
+    }
 
     this._setEventListeners();
 
@@ -254,10 +255,10 @@ export default class Card{
 
   _setEventListeners(){
     this.deleteButtonEl.addEventListener('click', () => {
-      removeLike(this.item)
+      this.deleteCard(this.item)
     })
     this.likeButtonEl.addEventListener('click', () => {
-      if (evt.target.classList.contains('element__like-button_activ')){
+      if (this.likeButtonEl.classList.contains('element__like-button_activ')){
         this.removeLike(this.item)
       } else {
         this.addLike(this.item)
