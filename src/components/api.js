@@ -14,8 +14,8 @@ export { Api }
 // класс Api рефакторинг ООП
 class Api {
   constructor(config) {
-    this._baseUrl = config.baseUrl;
-    this._headers = config.headers;
+    this.baseUrl = config.baseUrl;
+    this.headers = config.headers;
   }
 
   onResponse(res) {
@@ -23,27 +23,27 @@ class Api {
   }
   //загрузка карточек с сервера
   getAllCards() {
-    return fetch(`${this._baseUrl}/cards`, {
+    return fetch(`${this.baseUrl}/cards`, {
       method: 'GET',
-      headers: this._headers
+      headers: this.headers
     })
       .then(this.onResponse)
   }
 
   //получение информации пользователя
   getUserInfo() {
-    return fetch(`${this._baseUrl}/users/me`, {
+    return fetch(`${this.baseUrl}/users/me`, {
       method: 'GET',
-      headers: this._headers
+      headers: this.headers
     })
       .then(this.onResponse)
   }
 
   //редактирование профиля пользователя
   editProfile(dataProfile) {
-    return fetch(`${this._baseUrl}/users/me`, {
+    return fetch(`${this.baseUrl}/users/me`, {
       method: 'PATCH',
-      headers: this._headers,
+      headers: this.headers,
       body: JSON.stringify(dataProfile)
     })
       .then(this.onResponse)
@@ -51,9 +51,9 @@ class Api {
 
   //получение новой карточки
   addNewCard(dataCard) {
-    return fetch(`${this._baseUrl}/cards`, {
+    return fetch(`${this.baseUrl}/cards`, {
       method: 'POST',
-      headers: this._headers,
+      headers: this.headers,
       body: JSON.stringify(dataCard)
     })
       .then(this.onResponse)
@@ -61,36 +61,36 @@ class Api {
 
   //удаление карточки
   deleteCardFrom(card) {
-    return fetch(`${this._baseUrl}/cards/${card}`, {
+    return fetch(`${this.baseUrl}/cards/${card}`, {
       method: 'DELETE',
-      headers: this._headers
+      headers: this.headers
     })
       .then(this.onResponse)
   }
 
   //постановка лайка
   addLike(dataId) {
-    return fetch(`${this._baseUrl}/cards/likes/${dataId}`, {
+    return fetch(`${this.baseUrl}/cards/likes/${dataId}`, {
       method: 'PUT',
-      headers: this._headers
+      headers: this.headers
     })
       .then(this.onResponse)
   }
 
   //снятие лайка
   removeLike(dataId) {
-    return fetch(`${this._baseUrl}/cards/likes/${dataId}`, {
+    return fetch(`${this.baseUrl}/cards/likes/${dataId}`, {
       method: 'DELETE',
-      headers: this._headers,
+      headers: this.headers,
     })
       .then(this.onResponse)
   }
 
   //обновление аватара пользователя
   changeAvatarImg(avatarData) {
-    return fetch(`${this._baseUrl}/users/me/avatar`, {
+    return fetch(`${this.baseUrl}/users/me/avatar`, {
       method: 'PATCH',
-      headers: this._headers,
+      headers: this.headers,
       body: JSON.stringify(avatarData)
     })
       .then(this.onResponse)

@@ -89,17 +89,16 @@ function renderProfileForm(){
 
 const imagePopup = new PopupWithImage('.popup_type_zoom-card');
 
-const editProfilePopup = new PopupWithForm('.popup_type_profile', editProfileCallback);
 
-const editAvatarPopup = new PopupWithForm('.popup_type_add__img-avatar', editAvatarCallback);
 
-const addNewCardPopup = new PopupWithForm('.popup_type_add_new-cards', addNewCardCallback);
+
+
 
 // функционал попапа с редактирования профиля
+
 const editProfileCallback = data => {
   editProfilePopup.setStatusButton(true);
-  api
-    .editProfile(data)
+  api.editProfile(data)
     .then(res => {
       userInfo.setUserInfo(res);
       editProfilePopup.close();
@@ -112,11 +111,9 @@ const editProfileCallback = data => {
     });
 };
 
-// функционал попапа с редактирования аватара
 const editAvatarCallback = data => {
   editAvatarPopup.setStatusButton(true);
-  api
-    .changeAvatarImg(data)
+  api.changeAvatarImg(data)
     .then(res => {
       userInfo.setUserInfo(res)
       editAvatarPopup.close();
@@ -129,90 +126,101 @@ const editAvatarCallback = data => {
     });
 };
 
-// функционал попапа с добавлением карточки
-const addNewCardCallback = data => {
-  addNewCardPopup.setStatusButton(true);
-  api
-    .addNewCard(data)
-    .then(res => {
-      cardList.setItem(res);
-      addNewCardPopup.close();
-    })
-    .catch(err => {
-      console.log(err);
-    })
-    .finally(() => {
-      addNewCardPopup.setStatusButton(false);
-    });
+const addNewCardCallback = async (data) => {
+  try {
+    addNewCardPopup.setStatusButton(false);
+    const res = await api.addNewCard(data);
+    cardList.setItem(res);
+    addNewCardPopup.close();
+  } catch (err) {
+    console.log(err);
+  } finally {
+    addNewCardPopup.setStatusButton(true);
+  }
 };
 
-// вешаем обработчики на попапы
+// функционал попапа с редактирования профиля
+const editProfilePopup = new PopupWithForm('.popup_type_profile', editProfileCallback);
 
+// функционал попапа с редактирования аватара
+const editAvatarPopup = new PopupWithForm('.popup_type_add__img-avatar', editAvatarCallback);
+
+// функционал попапа с добавлением карточки
+const addNewCardPopup = new PopupWithForm('.popup_type_add_new-cards', addNewCardCallback);
+
+// вешаем обработчики на попапы
 profileAddCardsButton.addEventListener('click', () => {
   addNewCardPopup.open();
-} )
+});
 
 profileInfoEditButton.addEventListener('click', () => {
   renderProfileForm();
   editProfilePopup.open();
-})
+});
 
 profileAddAvatarButton.addEventListener('click', () => {
   editAvatarPopup.open();
-})
+});
 
 
 // доработать код когда будет UserInfo класс, этот код заменит Promise.all часть
 
 api.initializeData()
-.then(([user, initialCards]) =>{
-  userInfo.setUserInfo(user);
-  userId = user._id;
-
-  const cardList = new Section({
-    renderer: (item) => {
-      cardElement = createCard(item);
-      cardList.setItem(cardElement);
-    }
-  }, '.elements');
-  cardList.renderItems(initialCards)
+  .then(([user, initialCards]) =>{
+    userInfo.setUserInfo(user);
+    userId = user._id;
+    cardList.renderItems(initialCards)
   })
   .catch((err) => console.log(err))
 
+
+const cardList = new Section({
+  renderer: (item) => {
+    cardElement = createCard(item);
+    cardList.setItem(cardElement);
+  }
+}, '.elements');
+
+
 const createCard = (item) => {
-  const cardCreate = new Card(item, userId, imagePopup,
-    {deleteCard: (item) => {
+  const cardCreate = new Card(
+    item,
+    userId,
+    imagePopup,
+    {
+      deleteCard: (item) => {
+        api.deleteCardFrom(item._id)
+          .then((item) => {
+            cardCreate.deleteCard(item);
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      },
+      addLike: (item) => {
+        api.addLike(item._id)
+          .then((data) => {
+            cardCreate.addLike(data);
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      },
+      removeLike: (item) => {
+        api.removeLike(item._id)
+          .then((data) => {
+            cardCreate.removeLike(data);
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+    }
+  );
+  const cardElement = cardCreate.generateNewCard();
 
-      api.deleteCardFrom(item._id)
-    .then(() => {
-      cardCreate.deleteCard();
-    })
-    .catch((err) => {
-      console.error(err);
-    })
-    },
-    addLike: (item) => {
-      api.addLike(item._id)
-        .then((data) => {
-          console.log(item._id)
-          cardCreate.addLike(data);
-        })
-        .catch((err) => {
-          console.error(err)
-        })},
-    removeLike: (item) => {
-      api.removeLike(item._id)
-        .then((data) => {
-          cardCreate.removeLike(data);
-        })
-        .catch((err) => {
-          console.error(err)
-        })
-    }});
-
-    return cardCreate.generateNewCard();
-}
-
+  return cardElement;
+};
 // возможно, ненужный код
 
 // export function likeClick(card, data){
