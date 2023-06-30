@@ -23,7 +23,8 @@ import {
   popupImgAvatar,
   config,
   popupSelectorImage,
-  formPopupAvatar
+  formPopupAvatar,
+  profileAddAvatarButton
 } from './components/constants.js'
 
 import Card from './components/card.js';
@@ -79,6 +80,12 @@ const userInfo = new UserInfo({
 });
 //
 
+function renderProfileForm(){
+  const userData = userInfo.getUserInfo();
+  popupProfileNameInput.value = userData.name;
+  popupProfilejobInput.value = userData.about;
+}
+
 
 const imagePopup = new PopupWithImage('.popup_type_zoom-card');
 
@@ -92,7 +99,7 @@ const addNewCardPopup = new PopupWithForm('.popup_type_add_new-cards', addNewCar
 const editProfileCallback = data => {
   editProfilePopup.setStatusButton(true);
   api
-    .setUserInfo(data)
+    .editProfile(data)
     .then(res => {
       userInfo.setUserInfo(res);
       editProfilePopup.close();
@@ -146,7 +153,12 @@ profileAddCardsButton.addEventListener('click', () => {
 } )
 
 profileInfoEditButton.addEventListener('click', () => {
+  renderProfileForm();
   editProfilePopup.open();
+})
+
+profileAddAvatarButton.addEventListener('click', () => {
+  editAvatarPopup.open();
 })
 
 
@@ -156,6 +168,7 @@ api.initializeData()
 .then(([user, initialCards]) =>{
   userInfo.setUserInfo(user);
   userId = user._id;
+
   const cardList = new Section({
     renderer: (item) => {
       cardElement = createCard(item);
@@ -236,6 +249,7 @@ const createCard = (item) => {
 
 
 // popups.forEach((popup) => {
+//   console.log(popup)
 //   popup.addEventListener('mousedown', (evt) => {
 //     if (evt.target.classList.contains('popup_opened')) {
 //       closePopup(popup)

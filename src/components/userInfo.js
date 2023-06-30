@@ -13,9 +13,8 @@ class UserInfo {
 
   getUserInfo() {
     return {
-      userName: this.userName.textContent,
-      userAbout: this.userAbout.textContent,
-      userAvatar: this.userAvatar.src
+      name: this._userName.textContent,
+      about: this._userAbout.textContent,
     }
   }
 
