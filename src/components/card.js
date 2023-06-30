@@ -244,6 +244,7 @@ export default class Card{
   }
 
   addLike(data){
+    console.log(this.likeButtonEl)
     this.likeButtonEl.classList.add("element__like-button_activ");
     this.likeCount.textContent = data.likes.length;
   }

@@ -26,7 +26,8 @@ import {
   formPopupAvatar
 } from './components/constants.js'
 
-import Card, { handleFormAddNewCard, addCard } from './components/card.js';
+import Card from './components/card.js';
+import { handleFormAddNewCard, addCard } from './components/card.js';
 
 // import {
 //   hasInvalidInput,
@@ -40,11 +41,12 @@ import Card, { handleFormAddNewCard, addCard } from './components/card.js';
 
 import { FormValidator } from './components/validate.js';
 
-import {
-  closePopup,
-  handleProfileFormSubmit,
-  openPopup
-} from './components/modal.js'
+// ПРОВЕРКА
+// import {
+//   closePopup,
+//   handleProfileFormSubmit,
+//   openPopup
+// } from './components/modal.js'
 
 import { Api } from './components/api.js'
 import { PopupWithImage } from './components/PopUpWithImage';
@@ -79,15 +81,73 @@ const userInfo = new UserInfo({
 
 
 const imagePopup = new PopupWithImage('.popup_type_zoom-card');
-// imagePopup передадим в Card как handleImageClick
 
-const editAvatarPopup = new PopupWithForm('.popup_type_add__img-avatar');
+const editProfilePopup = new PopupWithForm('.popup_type_profile', editProfileCallback);
 
-const addNewCardPopup = new PopupWithForm('.popup_type_add_new-cards');
+const editAvatarPopup = new PopupWithForm('.popup_type_add__img-avatar', editAvatarCallback);
 
-const editProfilePopup = new PopupWithForm('.popup_type_profile');
+const addNewCardPopup = new PopupWithForm('.popup_type_add_new-cards', addNewCardCallback);
 
+// функционал попапа с редактирования профиля
+const editProfileCallback = data => {
+  editProfilePopup.setStatusButton(true);
+  api
+    .setUserInfo(data)
+    .then(res => {
+      userInfo.setUserInfo(res);
+      editProfilePopup.close();
+    })
+    .catch(err => {
+      console.log(err);
+    })
+    .finally(() => {
+      editProfilePopup.setStatusButton(false);
+    });
+};
 
+// функционал попапа с редактирования аватара
+const editAvatarCallback = data => {
+  editAvatarPopup.setStatusButton(true);
+  api
+    .changeAvatarImg(data)
+    .then(res => {
+      userInfo.setUserInfo(res)
+      editAvatarPopup.close();
+    })
+    .catch(err => {
+      console.log(err);
+    })
+    .finally(() => {
+      editAvatarPopup.setStatusButton(false);
+    });
+};
+
+// функционал попапа с добавлением карточки
+const addNewCardCallback = data => {
+  addNewCardPopup.setStatusButton(true);
+  api
+    .addNewCard(data)
+    .then(res => {
+      cardList.setItem(res);
+      addNewCardPopup.close();
+    })
+    .catch(err => {
+      console.log(err);
+    })
+    .finally(() => {
+      addNewCardPopup.setStatusButton(false);
+    });
+};
+
+// вешаем обработчики на попапы
+
+profileAddCardsButton.addEventListener('click', () => {
+  addNewCardPopup.open();
+} )
+
+profileInfoEditButton.addEventListener('click', () => {
+  editProfilePopup.open();
+})
 
 
 // доработать код когда будет UserInfo класс, этот код заменит Promise.all часть
@@ -109,6 +169,7 @@ api.initializeData()
 const createCard = (item) => {
   const cardCreate = new Card(item, userId, imagePopup,
     {deleteCard: (item) => {
+
       api.deleteCardFrom(item._id)
     .then(() => {
       cardCreate.deleteCard();
@@ -120,6 +181,7 @@ const createCard = (item) => {
     addLike: (item) => {
       api.addLike(item._id)
         .then((data) => {
+          console.log(item._id)
           cardCreate.addLike(data);
         })
         .catch((err) => {
@@ -184,18 +246,20 @@ const createCard = (item) => {
 //   })
 // })
 
-formPopupNewCards.addEventListener('submit', handleFormAddNewCard);
 
-profileAddCardsButton.addEventListener('click', () => openPopup(popupAddNewCards));
+// ПРОВЕРКА
+// formPopupNewCards.addEventListener('submit', handleFormAddNewCard);
 
-formPopupProfile.addEventListener('submit', handleProfileFormSubmit);
+// profileAddCardsButton.addEventListener('click', () => openPopup(popupAddNewCards));
 
-profileInfoEditButton.addEventListener('click', () => {
+// formPopupProfile.addEventListener('submit', handleProfileFormSubmit);
 
-  popupProfileNameInput.value = nameInput.textContent;
-  popupProfilejobInput.value = jobInput.textContent
-  openPopup(popupProfile)
-});
+// profileInfoEditButton.addEventListener('click', () => {
+
+//   popupProfileNameInput.value = nameInput.textContent;
+//   popupProfilejobInput.value = jobInput.textContent
+//   openPopup(popupProfile)
+// });
 
 // enableValidation({
 //   formSelector: '.popup__form',
