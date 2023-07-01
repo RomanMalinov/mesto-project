@@ -116,7 +116,7 @@ const editAvatarCallback = data => {
   api.changeAvatarImg(data)
     .then(res => {
       userInfo.setUserInfo(res)
-      editAvatarPopup.close();
+      editAvatarPopup.close();z
     })
     .catch(err => {
       console.log(err);
@@ -151,15 +151,19 @@ const addNewCardPopup = new PopupWithForm('.popup_type_add_new-cards', addNewCar
 // вешаем обработчики на попапы
 profileAddCardsButton.addEventListener('click', () => {
   addNewCardPopup.open();
+  newCardsFormValidator.clearForm(); // здесь и ниже передан метод очистки формы
 });
 
 profileInfoEditButton.addEventListener('click', () => {
   renderProfileForm();
   editProfilePopup.open();
+  profileFormValidator.clearForm(); 
+
 });
 
 profileAddAvatarButton.addEventListener('click', () => {
   editAvatarPopup.open();
+  avatarFormValidator.clearForm();
 });
 
 

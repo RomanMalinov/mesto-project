@@ -71,11 +71,17 @@ class FormValidator {
 
   }
 
+  //добавлен метод очистки формы
+  clearForm() {
+    this._inputList.map((inputElement) => {
+     return this._hideInputError(inputElement);
+    })
+    this._toggleButtonState();
+  }
 
   enableValidation() {
     this._setEventListeners()
   }
-
 }
 
 
