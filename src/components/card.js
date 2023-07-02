@@ -196,7 +196,7 @@ export default class Card {
     this._addLike = addLike;
     this._removeLike = removeLike;
 
-    
+
 
   }
 
@@ -208,7 +208,7 @@ export default class Card {
   }
 
   generateNewCard() {
-    this._card = this._getTemplate();
+    this._card = this._getTemplate()    ;
 
     this._captionEl = this._card.querySelector('.element__img-caption');
     this._imageEl = this._card.querySelector('.element__img');

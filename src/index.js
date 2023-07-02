@@ -157,7 +157,7 @@ profileAddCardsButton.addEventListener('click', () => {
 profileInfoEditButton.addEventListener('click', () => {
   renderProfileForm();
   editProfilePopup.open();
-  profileFormValidator.clearForm(); 
+  profileFormValidator.clearForm();
 
 });
 
