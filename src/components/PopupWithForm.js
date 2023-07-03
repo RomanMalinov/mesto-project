@@ -16,30 +16,24 @@ export default class PopupWithForm extends Popup{
 
     }
 
-
-    _getInputValues(){
-    console.log('сработало _getInputValues')
-     this._formInputs.forEach(input => {
-        this._inputValues[input.name] = input.value;
-        console.log(_inputValues[input.name])
-     });
-     return this._inputValues;
+    _getInputValues() {
+        this._formInputs.forEach(input => {
+          this._inputValues[input.name] = input.value;
+        });
+        return this._inputValues;
     }
 
     _submitHandler(evt) {
         evt.preventDefault();
-        console.log('сработало _submitHandler')
         this._formCallback(this._getInputValues());
       }
 
-    _setEventListeners(){
-        console.log('сработало _setEventListeners')
-        super._setEventListeners();
-        this._popupForm.addEventListener('submit', this._submitHandler);
+    setEventListeners(){
+        super.setEventListeners();
+        this._button.addEventListener('click', this._submitHandler);
     }
 
     setStatusButton(isLoading) {
-        console.log('сработало setStatusButton');
         isLoading ? this._button.textContent = 'Делаем магию...' : this._button.textContent = this._defaultText;
       }
 

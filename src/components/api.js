@@ -1,3 +1,5 @@
+import { data } from "jquery";
+
 export { Api }
 
 
@@ -44,7 +46,10 @@ class Api {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
-      body: JSON.stringify(dataProfile)
+      body: JSON.stringify({
+        name: dataProfile.name,
+        about: dataProfile.about
+      })
     })
       .then(this._onResponse)
   }
@@ -54,7 +59,10 @@ class Api {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
       headers: this._headers,
-      body: JSON.stringify(dataCard)
+      body: JSON.stringify({
+        name: dataCard.addNewCardName,
+        link: dataCard.addNewCardLink,
+      })
     })
       .then(this._onResponse)
   }
@@ -91,7 +99,9 @@ class Api {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
-      body: JSON.stringify(avatarData)
+      body: JSON.stringify({
+        avatar: avatarData.newAvatarLink
+      })
     })
       .then(this._onResponse)
   }

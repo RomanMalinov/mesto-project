@@ -24,7 +24,8 @@ import {
   config,
   popupSelectorImage,
   formPopupAvatar,
-  profileAddAvatarButton
+  profileAddAvatarButton,
+  popupAvatarLinkInput
 } from './components/constants.js'
 
 import Card from './components/card.js';
@@ -97,9 +98,11 @@ const imagePopup = new PopupWithImage('.popup_type_zoom-card');
 // функционал попапа с редактирования профиля
 
 const editProfileCallback = data => {
+  console.log(data)
   editProfilePopup.setStatusButton(true);
   api.editProfile(data)
     .then(res => {
+      console.log(res)
       userInfo.setUserInfo(res);
       editProfilePopup.close();
     })
@@ -116,7 +119,7 @@ const editAvatarCallback = data => {
   api.changeAvatarImg(data)
     .then(res => {
       userInfo.setUserInfo(res)
-      editAvatarPopup.close();z
+      editAvatarPopup.close();
     })
     .catch(err => {
       console.log(err);
@@ -128,14 +131,14 @@ const editAvatarCallback = data => {
 
 const addNewCardCallback = async (data) => {
   try {
-    addNewCardPopup.setStatusButton(false);
+    addNewCardPopup.setStatusButton(true);
     const res = await api.addNewCard(data);
     cardList.setItem(res);
     addNewCardPopup.close();
   } catch (err) {
     console.log(err);
   } finally {
-    addNewCardPopup.setStatusButton(true);
+    addNewCardPopup.setStatusButton(false);
   }
 };
 

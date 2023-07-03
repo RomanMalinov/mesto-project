@@ -236,7 +236,7 @@ export default class Card {
 
   // не работает delete
   deleteCard() {
-    this.item.remove();
+    this._card.remove();
   }
 
   addLike(data) {
