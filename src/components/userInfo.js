@@ -1,7 +1,7 @@
-export { UserInfo }
+
 
 // Создание класса UserInfo
-class UserInfo {
+export default class UserInfo {
   constructor( {selectorUserName, selectorUserAbout, selectorUserAvatar }) {
     this._selectorUserName = selectorUserName;
     this._selectorUserAbout = selectorUserAbout;
