@@ -5,7 +5,6 @@ export class Section {
     }
 
     setItem(item) {
-      console.log(item)
       this._container.prepend(item);
     }
 

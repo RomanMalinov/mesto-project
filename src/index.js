@@ -133,7 +133,7 @@ const addNewCardCallback = async (data) => {
   try {
     addNewCardPopup.setStatusButton(true);
     const res = await api.addNewCard(data);
-    cardList.setItem(res);
+    cardList.setItem(createCard(res));
     addNewCardPopup.close();
   } catch (err) {
     console.log(err);
