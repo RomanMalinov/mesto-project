@@ -3,6 +3,14 @@ export { listContainerEl, temlateEl, popupProfile, popupAddNewCards, profileInfo
    popupProfilejobInput, formPopupNewCards, popupNewCardsNameInput, popupNewCardsLinkInput, popupFormBattonSave,
    formPopupAvatar, popupAvatarLinkInput, profileAddAvatarButton, popupAvatar, popupImgAvatar, popupFormBattonSaveProfile, popupFormBattonSavenewCards, popupFormBattonSaveAvatar };
 
+// Конфиг для API
+export const config = {
+  baseUrl: 'https://nomoreparties.co/v1/plus-cohort-25',
+  headers: {
+    'content-type': 'application/json',
+    authorization: '4795c652-4f69-4cb4-b309-abc01e676f2c',
+  }
+}
 // Переменные
 const listContainerEl = document.querySelector('.elements');
 const temlateEl = document.querySelector('.template')
@@ -40,5 +48,3 @@ const popupImgAvatar = document.querySelector('.profile__image');
 const popupFormBattonSaveProfile = document.querySelector('.popup__form-button-save-profile');
 const popupFormBattonSavenewCards = document.querySelector('.popup__form-button-save-new-cards');
 const popupFormBattonSaveAvatar = document.querySelector('.popup__form-button-save-avatar');
-
-

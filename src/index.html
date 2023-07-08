@@ -41,11 +41,11 @@
       <form class="popup__form" name="profile-form" novalidate>
         <h2 class="popup__form-title">Редактировать профиль</h2>
         <input class="popup__form-input popup__form-input-name" id="name-input" type="text" required minlength="2"
-          maxlength="40" placeholder="Имя" name="form-new-cards-name" pattern="[A-Za-zА-пр-ё\s\-]+$"
+          maxlength="40" placeholder="Имя" name="name" pattern="[A-Za-zА-пр-ё\s\-]+$"
           data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы">
         <span class="form__input-error name-input-error"></span>
         <input class="popup__form-input popup__form-input-job" id="job-input" type="text" required minlength="2"
-          maxlength="200" placeholder="Род деятельности" name="form-new-cards-link">
+          maxlength="200" placeholder="Род деятельности" name="about">
         <span class="form__input-error job-input-error"></span>
         <button class="popup__form-button-save popup__form-button-save-profile" type="submit">Сохранить</button>
       </form>
@@ -58,11 +58,11 @@
       <form class="popup__form popup__form_type_new-card" name="card-form" novalidate>
         <h2 class="popup__form-title">Новое место</h2>
         <input class="popup__form-input popup__form-input-img-name" id="img-name-input" required minlength="2"
-          maxlength="30" type="text" placeholder="Название" name="form-new-cards-name" pattern="[A-Za-zА-пр-ё\s\-]+$"
+          maxlength="30" type="text" placeholder="Название" name="addNewCardName" pattern="[A-Za-zА-пр-ё\s\-]+$"
           data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы">
         <span class="form__input-error img-name-input-error"></span>
         <input class="popup__form-input popup__form-input-link" id="link-input" required type="url"
-          placeholder="Ссылка на картинку" name="form-new-cards-link">
+          placeholder="Ссылка на картинку" name="addNewCardLink">
         <span class="form__input-error link-input-error"></span>
         <button class="popup__form-button-save popup__form-button-save-new-cards button_inactive" disabled type="submit">Создать</button>
       </form>
@@ -75,7 +75,7 @@
       <form class="popup__form popup__form_type_img-avatar" name="avatar-form" novalidate>
         <h2 class="popup__form-title">Обновить аватар</h2>
         <input class="popup__form-input popup__form-input-link-avatar" id="link-input" required type="url"
-          placeholder="Ссылка на картинку" name="form-new-cards-link">
+          placeholder="Ссылка на картинку" name="newAvatarLink">
         <span class="form__input-error link-input-error"></span>
         <button class="popup__form-button-save popup__form-button-save-avatar button_inactive" disabled type="submit">Сохранить</button>
       </form>
