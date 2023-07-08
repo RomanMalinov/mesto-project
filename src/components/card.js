@@ -1,5 +1,5 @@
 export default class Card {
-  constructor(item, userId, handleImageClick, { deleteCard, addLike, removeLike }) {
+  constructor(item, userId, handleImageClick, templateSelector, { deleteCard, addLike, removeLike }) {
     this.item = item;
     this._likes = item.likes;
     this._name = item.name;
@@ -8,13 +8,14 @@ export default class Card {
     this._link = item.link;
     this._userId = userId;
     this._handleImageClick = handleImageClick;
+    this._templateSelector = templateSelector;
     this._deleteCard = deleteCard;
     this._addLike = addLike;
     this._removeLike = removeLike;
   }
 
   _getTemplate() {
-    const cardElement = document.querySelector('.template').content.querySelector('.element').cloneNode(true);
+    const cardElement = document.querySelector(this._templateSelector).content.querySelector('.element').cloneNode(true);
     return cardElement;
   }
 

@@ -1,4 +1,4 @@
-import './pages/index.css';
+import './index.css';
 
 import {
   profileInfoEditButton,
@@ -10,23 +10,23 @@ import {
   config,
   formPopupAvatar,
   profileAddAvatarButton,
-} from './components/constants.js'
+} from '../utils/constants.js'
 
-import Card from './components/Card.js';
-import FormValidator from './components/FormValidator.js';
-import Api  from './components/Api.js'
-import PopupWithImage  from './components/PopUpWithImage';
-import UserInfo  from './components/UserInfo';
-import Section from './components/Section';
-import PopupWithForm from './components/PopupWithForm';
+import Card from '../components/Card.js';
+import FormValidator from '../components/FormValidator.js';
+import Api  from '../components/Api.js'
+import PopupWithImage  from '../components/PopUpWithImage';
+import UserInfo  from '../components/UserInfo';
+import Section from '../components/Section';
+import PopupWithForm from '../components/PopupWithForm';
 
-export let userId = null
+export let userId = null;
 let cardElement;
+const templateSelector = '.template';
 
 const selectorUserName = '.profile__info-title';
 const selectorUserAbout = '.profile__info-subtitle';
 const selectorUserAvatar = '.profile__image';
-
 
 const api = new Api(config)
 
@@ -44,7 +44,7 @@ function renderProfileForm(){
 }
 
 const imagePopup = new PopupWithImage('.popup_type_zoom-card');
-
+imagePopup.setEventListeners();
 // функционал попапа с редактирования профиля
 
 const editProfileCallback = data => {
@@ -94,13 +94,13 @@ const addNewCardCallback = async (data) => {
 
 // функционал попапа с редактирования профиля
 const editProfilePopup = new PopupWithForm('.popup_type_profile', editProfileCallback);
-
+editProfilePopup.setEventListeners();
 // функционал попапа с редактирования аватара
 const editAvatarPopup = new PopupWithForm('.popup_type_add__img-avatar', editAvatarCallback);
-
+editAvatarPopup.setEventListeners();
 // функционал попапа с добавлением карточки
 const addNewCardPopup = new PopupWithForm('.popup_type_add_new-cards', addNewCardCallback);
-
+addNewCardPopup.setEventListeners();
 // вешаем обработчики на попапы
 profileAddCardsButton.addEventListener('click', () => {
   addNewCardPopup.open();
@@ -141,6 +141,7 @@ const createCard = (item) => {
     item,
     userId,
     imagePopup,
+    templateSelector,
     {
       deleteCard: (item) => {
         api.deleteCardFrom(item._id)
